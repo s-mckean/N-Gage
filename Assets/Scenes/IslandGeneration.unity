@@ -138,7 +138,7 @@ MonoBehaviour:
   islandPrefab: {fileID: 1374238241383186, guid: 58a0abb5dd125a343bb57451584e74a8,
     type: 2}
   islandAmount: 9
-  islandSpacing: 2
+  islandSpacing: 13
 --- !u!4 &416214393
 Transform:
   m_ObjectHideFlags: 0
