@@ -81,7 +81,7 @@ public class IslandController : MonoBehaviour {
         foreach (GameObject island in islands)
         {
             temp = island.transform.position;
-            temp.y += Random.Range(-6f, 6f);
+            temp.y += Random.Range(-12f, 12f);
             island.transform.position = temp;
         }
     }
@@ -94,9 +94,9 @@ public class IslandController : MonoBehaviour {
         foreach (GameObject island in islands)
         {
             temp = island.transform.localScale;
-            temp.x += Random.Range(.1f, 1f);
-            temp.y += Random.Range(.1f, 1f);
-            temp.z += Random.Range(.1f, 1f);
+            temp.x += Random.Range(.1f, 3f);
+            temp.y += Random.Range(.1f, 3f);
+            temp.z += Random.Range(.1f, 3f);
             island.transform.localScale = temp;
         }
     }
@@ -123,6 +123,21 @@ public class IslandController : MonoBehaviour {
                 islandAmount++;
                 islands.Add(child.gameObject);
             }
+        }
+    }
+
+    public void RandomizeXY()
+    {
+        float random;
+        Vector3 temp = new Vector3();
+
+        foreach (GameObject island in islands)
+        {
+            random = Random.Range(-5f, 5f);
+            temp = island.transform.position;
+            temp.x += random;
+            temp.z += random;
+            island.transform.position = temp;
         }
     }
 }

@@ -36,5 +36,10 @@ public class CustomUnitGeneratorHelper : Editor
         {
             unitGenerator.IncreaseRadius();
         }
+
+        if (GUILayout.Button("Randomize X and Y"))
+        {
+            unitGenerator.RandomizeXY();
+        }
     }
 }
