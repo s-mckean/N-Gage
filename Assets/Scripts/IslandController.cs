@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class IslandController : MonoBehaviour {
+public class IslandController : MonoBehaviour, IslandInterface {
 
     public GameObject islandPrefab;
     private IslandController Instance;
@@ -15,6 +16,7 @@ public class IslandController : MonoBehaviour {
     private List<Vector3> positions = new List<Vector3>();
     private List<GameObject> islands = new List<GameObject>();
 
+
 	// Use this for initialization
 	void Start () {
         if (Instance == null)
@@ -25,40 +27,38 @@ public class IslandController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+	}
 
+    public void GenerateIslands()
+    {
         islandWidth = islandPrefab.GetComponent<MeshRenderer>().bounds.size.x;
         islandHeight = islandPrefab.GetComponent<MeshRenderer>().bounds.size.y;
         numIsland = islandAmount - 1;
 
+        GetPositions();
 
-        getPositions();
-        generateIslands();
-
-	}
-
-    void generateIslands()
-    {
         for (int i = 0; i < islandAmount; i++)
         {
             GameObject temp = Instantiate(islandPrefab, positions[i], Quaternion.identity);
+            temp.transform.SetParent(this.gameObject.transform, true);
             islands.Add(temp);
         }
 
-        if (doIslandsOverlap())
+        if (DoIslandsOverlap())
         {
             bool notDone = true;
 
             do
             {
                 islandSpacing++;
-                getPositions();
+                GetPositions();
 
                 for (int i = 0; i < islandAmount; i++)
                 {
                     islands[i].transform.position = positions[i];
                 }
 
-                if (!doIslandsOverlap())
+                if (!DoIslandsOverlap())
                 {
                     notDone = false;
                 }
@@ -67,7 +67,15 @@ public class IslandController : MonoBehaviour {
         }
     }
 
-    void getPositions()
+    public void EraseIslands()
+    {
+        foreach (GameObject child in islands)
+        {
+            DestroyImmediate(child);
+        }
+    }
+
+    public void GetPositions()
     {
         float radius = islandWidth * islandSpacing;
 
@@ -82,8 +90,9 @@ public class IslandController : MonoBehaviour {
         }
     }
 
-    bool doIslandsOverlap()
+    public bool DoIslandsOverlap()
     {
+        /*
         for (int i = 0; i < islandAmount; i++)
         {
             if (islands[i].GetComponent<Island>().wrongPlacement == true)
@@ -91,6 +100,7 @@ public class IslandController : MonoBehaviour {
                 return true;
             }
         }
+         * */
         return false;
     }
 }
