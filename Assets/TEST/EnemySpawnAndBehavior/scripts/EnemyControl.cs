@@ -14,7 +14,12 @@ public class EnemyControl : MonoBehaviour {
 
 	float angleRotation = 10 * Mathf.Deg2Rad;	
 
-	readonly Vector3 Y_AXIS = new Vector3(0.0f, 1.0f, 0.0f);
+	float deltaRotateDirTimer = 0.0f;
+	float deltaRotateDirTimerLimit;
+	const float LOWER_DELTA_ROTATE = 1.0f;
+	const float UPPER_DELTA_ROTATE = 5.0f;
+
+	//readonly Vector3 Y_AXIS = new Vector3(0.0f, 1.0f, 0.0f);
 
 	float speed;
 	const float MAX_SPEED = 0.01f;
@@ -26,11 +31,14 @@ public class EnemyControl : MonoBehaviour {
 	const float LOWER_MOVE_TIME = 0.2f;
 	const float UPPER_MOVE_TIME = 1.0f;
 
-
+	
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
-		speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);		
+		speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);			
+		angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
+
+		transform.Rotate(transform.up, Random.Range(-360, 360) * Mathf.PI, Space.World);
 	}
 
 	// Update is called once per frame
@@ -51,6 +59,14 @@ public class EnemyControl : MonoBehaviour {
 			moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
 		}
 
-		transform.Rotate(Y_AXIS, angleRotation);		
+		transform.Rotate(transform.up, angleRotation);		
+
+		// change rotation direction
+		if( (deltaRotateDirTimer += Time.deltaTime) >= deltaRotateDirTimerLimit) {
+			angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
+
+			deltaRotateDirTimer = 0.0f;
+			deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
+		}
 	}
 }
