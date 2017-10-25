@@ -55,6 +55,7 @@ public class IslandController : MonoBehaviour {
         {
             DestroyImmediate(child);
         }
+        islands = new List<GameObject>();
     }
 
     public void GetPositions()
@@ -115,6 +116,7 @@ public class IslandController : MonoBehaviour {
     {
         if (islands.Count == 0)
         {
+            islands = new List<GameObject>();
             islandAmount = 0;
             foreach (Transform child in transform)
             {
