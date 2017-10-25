@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class Island : MonoBehaviour {
 
+    public float angle;
 
     [HideInInspector]
     public bool wrongPlacement = false;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnTriggerEnter(Collider other)
     {

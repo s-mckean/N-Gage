@@ -21,5 +21,20 @@ public class CustomUnitGeneratorHelper : Editor
         {
             unitGenerator.EraseIslands();
         }
+
+        if (GUILayout.Button("Randomize Heights"))
+        {
+            unitGenerator.RandomizeHeights();
+        }
+
+        if (GUILayout.Button("Randomize Scales"))
+        {
+            unitGenerator.RandomizeScales();
+        }
+
+        if (GUILayout.Button("Increase Radius"))
+        {
+            unitGenerator.IncreaseRadius();
+        }
     }
 }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class IslandController : MonoBehaviour, IslandInterface {
+public class IslandController : MonoBehaviour {
 
     public GameObject islandPrefab;
+    private GameObject _islandPrefab;
+
     private IslandController Instance;
     public int islandAmount = 5;
-    private int islandSpacing = 2;
+    public float islandSpacing = 4;
     private float islandWidth;
     private float islandHeight;
     private int numIsland;
 
     private List<Vector3> positions = new List<Vector3>();
     private List<GameObject> islands = new List<GameObject>();
-
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,8 @@ public class IslandController : MonoBehaviour, IslandInterface {
         {
             Destroy(gameObject);
         }
+
+        CheckForIslands();
 	}
 
     public void GenerateIslands()
@@ -39,36 +42,15 @@ public class IslandController : MonoBehaviour, IslandInterface {
 
         for (int i = 0; i < islandAmount; i++)
         {
-            GameObject temp = Instantiate(islandPrefab, positions[i], Quaternion.identity);
-            temp.transform.SetParent(this.gameObject.transform, true);
-            islands.Add(temp);
-        }
-
-        if (DoIslandsOverlap())
-        {
-            bool notDone = true;
-
-            do
-            {
-                islandSpacing++;
-                GetPositions();
-
-                for (int i = 0; i < islandAmount; i++)
-                {
-                    islands[i].transform.position = positions[i];
-                }
-
-                if (!DoIslandsOverlap())
-                {
-                    notDone = false;
-                }
-            }
-            while (notDone);
+            _islandPrefab = Instantiate(islandPrefab, positions[i], Quaternion.identity);
+            _islandPrefab.transform.SetParent(this.gameObject.transform, true);
+            islands.Add(_islandPrefab);
         }
     }
 
     public void EraseIslands()
     {
+        CheckForIslands();
         foreach (GameObject child in islands)
         {
             DestroyImmediate(child);
@@ -90,17 +72,55 @@ public class IslandController : MonoBehaviour, IslandInterface {
         }
     }
 
-    public bool DoIslandsOverlap()
+    public void RandomizeHeights()
     {
-        /*
+        CheckForIslands();
+        Vector3 temp = new Vector3(0,0,0);      
+
+        foreach (GameObject island in islands)
+        {
+            temp = island.transform.position;
+            temp.y += Random.Range(-6f, 6f);
+            island.transform.position = temp;
+        }
+    }
+
+    public void RandomizeScales()
+    {
+        CheckForIslands();
+        Vector3 temp = new Vector3(0,0,0);
+
+        foreach (GameObject island in islands)
+        {
+            temp = island.transform.localScale;
+            temp.x += Random.Range(.1f, 1f);
+            temp.y += Random.Range(.1f, 1f);
+            temp.z += Random.Range(.1f, 1f);
+            island.transform.localScale = temp;
+        }
+    }
+
+    public void IncreaseRadius()
+    {
+        CheckForIslands();
+        islandSpacing += 1f;
+        GetPositions();
         for (int i = 0; i < islandAmount; i++)
         {
-            if (islands[i].GetComponent<Island>().wrongPlacement == true)
+            islands[i].transform.position = positions[i];
+        }
+    }
+
+    public void CheckForIslands()
+    {
+        if (islands.Count == 0)
+        {
+            islandAmount = 0;
+            foreach (Transform child in transform)
             {
-                return true;
+                islandAmount++;
+                islands.Add(child.gameObject);
             }
         }
-         * */
-        return false;
     }
 }
