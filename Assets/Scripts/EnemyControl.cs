@@ -12,7 +12,7 @@ using UnityEngine.AI;
 public class EnemyControl : MonoBehaviour {
 
 	public float hitPoints = 50f;
-	Transform hero;
+	public Transform hero;
 
 	Rigidbody rb;
 
@@ -49,37 +49,44 @@ public class EnemyControl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-		// move forward
-		Vector3 newPos = new Vector3(0.0f, 0.0f, speed);
-		newPos = transform.rotation * newPos;
-		transform.position = new Vector3(transform.position.x + newPos.x, transform.position.y + newPos.y, transform.position.z + newPos.z);
+        if (FollowPlayer()) Debug.Log("Following");
+        else
+        {
+            // move forward
+            Vector3 newPos = new Vector3(0.0f, 0.0f, speed);
+            newPos = transform.rotation * newPos;
+            transform.position = new Vector3(transform.position.x + newPos.x, transform.position.y + newPos.y, transform.position.z + newPos.z);
 
-		// change the movement
-		if((moveTimer += Time.deltaTime) >= moveTimeLimit) {			
-			// get a new speed
-			speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);
+            // change the movement
+            if ((moveTimer += Time.deltaTime) >= moveTimeLimit)
+            {
+                // get a new speed
+                speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);
 
-			// reset timer
-			moveTimer = 0.0f;
-			moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
-		}
+                // reset timer
+                moveTimer = 0.0f;
+                moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
+            }
 
-		// if enemy is moving in bound, don't rotate the enemy.
-		if(timerMoveInbound < 0.0f) {
-			timerMoveInbound -= Time.deltaTime;
-		}
-		else { 
-			transform.Rotate(transform.up, angleRotation);
-		}	
+            // if enemy is moving in bound, don't rotate the enemy.
+            if (timerMoveInbound < 0.0f)
+            {
+                timerMoveInbound -= Time.deltaTime;
+            }
+            else
+            {
+                transform.Rotate(transform.up, angleRotation);
+            }
 
-		// change rotation direction
-		if( (deltaRotateDirTimer += Time.deltaTime) >= deltaRotateDirTimerLimit) {
-			angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
+            // change rotation direction
+            if ((deltaRotateDirTimer += Time.deltaTime) >= deltaRotateDirTimerLimit)
+            {
+                angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
 
-			deltaRotateDirTimer = 0.0f;
-			deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
-		}
+                deltaRotateDirTimer = 0.0f;
+                deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
+            }
+        }
 
 	}
 
@@ -106,6 +113,20 @@ public class EnemyControl : MonoBehaviour {
 		// play sound effect
 		AudioController.instance.PlayGrandDaddySFX();
         Destroy(gameObject);
-    }        
+    }
+    
+    public bool FollowPlayer()
+    {
+        Vector3 toPlayerVector = transform.position - hero.position;
+        Debug.Log(toPlayerVector);
+        if (Mathf.Abs(toPlayerVector.x) < 5 && Mathf.Abs(toPlayerVector.z) < 5)
+        {
+            Vector3 lookAtTransform = new Vector3(hero.position.x, hero.position.y - 0.8f, hero.position.z);
+            transform.LookAt(lookAtTransform);
+            transform.position = transform.position + (transform.rotation * new Vector3(0f, 0f, speed));
+            return true;
+        }
+        else return false;
+    }
     
 }
