@@ -19,7 +19,9 @@ public class EnemyControl : MonoBehaviour {
 	const float LOWER_DELTA_ROTATE = 1.0f;
 	const float UPPER_DELTA_ROTATE = 5.0f;
 
-	//readonly Vector3 Y_AXIS = new Vector3(0.0f, 1.0f, 0.0f);
+
+	float timerMoveInbound;
+	const float MAX_MOVE_INBOUND_TIME = 3.0f;
 
 	float speed;
 	const float MAX_SPEED = 0.01f;
@@ -31,7 +33,6 @@ public class EnemyControl : MonoBehaviour {
 	const float LOWER_MOVE_TIME = 0.2f;
 	const float UPPER_MOVE_TIME = 1.0f;
 
-	
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
@@ -59,7 +60,12 @@ public class EnemyControl : MonoBehaviour {
 			moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
 		}
 
-		transform.Rotate(transform.up, angleRotation);		
+		if(timerMoveInbound < 0.0f) {
+			timerMoveInbound -= Time.deltaTime;
+		}
+		else { 
+			transform.Rotate(transform.up, angleRotation);
+		}	
 
 		// change rotation direction
 		if( (deltaRotateDirTimer += Time.deltaTime) >= deltaRotateDirTimerLimit) {
@@ -67,6 +73,15 @@ public class EnemyControl : MonoBehaviour {
 
 			deltaRotateDirTimer = 0.0f;
 			deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		// enemy exiting the area, turn enemy around
+		if(other.gameObject.tag == "CreatureArea") {
+			transform.Rotate(transform.up, (180.0f + Random.Range(-50.0f, 50.0f)) * Mathf.PI, Space.World);
+			Debug.Log("exiting creature area");
+			timerMoveInbound = MAX_MOVE_INBOUND_TIME;
 		}
 	}
 }
