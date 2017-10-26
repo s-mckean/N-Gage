@@ -5,7 +5,8 @@ public class Playershooting : MonoBehaviour {
     public float damage = 10f;
     public float range = 100f;
     public Camera playerCam;
-    
+    public GameObject GunShots;
+
     void Start () {
 		
 	}
@@ -34,7 +35,9 @@ public class Playershooting : MonoBehaviour {
                 enemy.TakeDamage(damage);
             }
 
-        
+            GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(shots, 1f);
+
         }
     }
 }
