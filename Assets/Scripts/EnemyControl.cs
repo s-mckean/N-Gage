@@ -86,8 +86,7 @@ public class EnemyControl : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		// enemy exiting the area, turn enemy around
 		if(other.gameObject.tag == "CreatureArea") {
-			transform.Rotate(transform.up, 180.0f * Mathf.PI, Space.World);
-			Debug.Log("exiting creature area");
+			transform.Rotate(transform.up, 180.0f * Mathf.PI, Space.World);			
 			timerMoveInbound = MAX_MOVE_INBOUND_TIME;
 		}
 	}
