@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /**
  * 
@@ -39,7 +40,8 @@ public class EnemyControl : MonoBehaviour {
 		angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
 
 		transform.Rotate(transform.up, Random.Range(-360, 360) * Mathf.PI, Space.World);
-	}
+
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -68,5 +70,24 @@ public class EnemyControl : MonoBehaviour {
 			deltaRotateDirTimer = 0.0f;
 			deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
 		}
-	}
+
+        float distance = Vector3.Distance(hero.position, transform.position);
+    }
+
+    public float hitPoints = 50f;
+    Transform hero;
+
+    public void TakeDamage(float amount)
+    {
+        hitPoints -= amount;
+        if (hitPoints <= 0f)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
 }

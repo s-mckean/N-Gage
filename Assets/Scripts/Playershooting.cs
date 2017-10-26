@@ -31,7 +31,7 @@ public class Playershooting : MonoBehaviour {
             Debug.Log(hit.transform.name);
             if (enemy != null)
             {
-                
+                enemy.TakeDamage(damage);
             }
 
         
