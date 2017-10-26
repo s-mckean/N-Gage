@@ -30,6 +30,20 @@ public class IslandController : MonoBehaviour {
         }
 
         CheckForIslands();
+
+        foreach (GameObject island in islands)
+        {
+            island.GetComponent<Island>().triggeredStart();
+            int temp = Random.Range(-2, 2);
+            if (temp <= 0)
+            {
+                island.GetComponent<Island>().moveUpward = true;
+            }
+            else
+            {
+                island.GetComponent<Island>().moveUpward = false;
+            }
+        }
 	}
 
     public void GenerateIslands()
