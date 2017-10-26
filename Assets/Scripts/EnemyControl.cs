@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /**
  * 
@@ -9,6 +10,9 @@ using UnityEngine;
  */
 
 public class EnemyControl : MonoBehaviour {
+
+	public float hitPoints = 50f;
+	Transform hero;
 
 	Rigidbody rb;
 
@@ -40,7 +44,8 @@ public class EnemyControl : MonoBehaviour {
 		angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
 
 		transform.Rotate(transform.up, Random.Range(-360, 360) * Mathf.PI, Space.World);
-	}
+
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -60,6 +65,7 @@ public class EnemyControl : MonoBehaviour {
 			moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
 		}
 
+		// if enemy is moving in bound, don't rotate the enemy.
 		if(timerMoveInbound < 0.0f) {
 			timerMoveInbound -= Time.deltaTime;
 		}
@@ -74,14 +80,31 @@ public class EnemyControl : MonoBehaviour {
 			deltaRotateDirTimer = 0.0f;
 			deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
 		}
+
 	}
 
 	void OnTriggerExit(Collider other) {
 		// enemy exiting the area, turn enemy around
 		if(other.gameObject.tag == "CreatureArea") {
-			transform.Rotate(transform.up, (180.0f + Random.Range(-50.0f, 50.0f)) * Mathf.PI, Space.World);
+			transform.Rotate(transform.up, 180.0f * Mathf.PI, Space.World);
 			Debug.Log("exiting creature area");
 			timerMoveInbound = MAX_MOVE_INBOUND_TIME;
 		}
 	}
+
+	
+    public void TakeDamage(float amount)
+    {
+        hitPoints -= amount;
+        if (hitPoints <= 0f)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }        
+    
 }
