@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 124258344016359070}
   - component: {fileID: 114251450497795712}
   m_Layer: 0
-  m_Name: FirstPersonCharacter
+  m_Name: Gun
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,12 +241,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsWalking: 0
-  m_WalkSpeed: 0
-  m_RunSpeed: 0
+  m_WalkSpeed: 5
+  m_RunSpeed: 10
   m_RunstepLenghten: 0
-  m_JumpSpeed: 0
+  m_JumpSpeed: 3
   m_StickToGroundForce: 0
-  m_GravityMultiplier: 0
+  m_GravityMultiplier: 1
   m_MouseLook:
     XSensitivity: 2
     YSensitivity: 2
@@ -315,8 +315,8 @@ MonoBehaviour:
     BobAmount: 0
   m_StepInterval: 0
   m_FootstepSounds: []
-  m_JumpSound: {fileID: 0}
-  m_LandSound: {fileID: 0}
+  m_JumpSound: {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
+  m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
 --- !u!124 &124258344016359070
 Behaviour:
   m_ObjectHideFlags: 1
