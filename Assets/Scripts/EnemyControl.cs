@@ -102,7 +102,7 @@ public class EnemyControl : MonoBehaviour
         if (other.gameObject.tag == "GravityZone")
         {
             Debug.Log("Enemy Entered Island");
-            this.gameObject.transform.SetParent(other.gameObject.transform);
+            this.gameObject.transform.SetParent(other.gameObject.transform, true);
         }
     }
 

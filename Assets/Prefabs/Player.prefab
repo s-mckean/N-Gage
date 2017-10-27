@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 54885641320082766}
   - component: {fileID: 136869041241748880}
   - component: {fileID: 114430605278782256}
+  - component: {fileID: 65691687210221486}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1366500645438594}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 82, z: 0}
+  m_LocalPosition: {x: 196.37263, y: 112.77992, z: -461.24805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4759106348330864}
@@ -126,6 +127,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65691687210221486
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366500645438594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81445292465220186
 AudioListener:
   m_ObjectHideFlags: 1
@@ -195,6 +208,7 @@ MonoBehaviour:
   boostStrength: 200000
   boostCooldown: 5
   boostKey: 101
+  boostUI: {fileID: 0}
 --- !u!114 &114527322624538726
 MonoBehaviour:
   m_ObjectHideFlags: 1
