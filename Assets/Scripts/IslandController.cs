@@ -8,6 +8,8 @@ public class IslandController : MonoBehaviour {
     public GameObject islandPrefab;
     private GameObject _islandPrefab;
 
+    private GameObject initialIsland;
+
     private IslandController Instance;
     public int islandAmount = 5;
     public float islandSpacing = 4;
@@ -15,7 +17,6 @@ public class IslandController : MonoBehaviour {
     public float rotationSpeed = 1f;
     private float islandWidth;
     private float islandHeight;
-    private int numIsland;
     private float radius;
 
     private List<Vector3> positions = new List<Vector3>();
@@ -90,9 +91,10 @@ public class IslandController : MonoBehaviour {
 
     public void GenerateIslands()
     {
-        islandWidth = islandPrefab.GetComponent<MeshRenderer>().bounds.size.x;
-        islandHeight = islandPrefab.GetComponent<MeshRenderer>().bounds.size.y;
-        numIsland = islandAmount - 1;
+        initialIsland = this.gameObject.transform.Find("InitialIsland").gameObject;
+
+        islandWidth = initialIsland.GetComponent<MeshRenderer>().bounds.size.x;
+        islandHeight = initialIsland.GetComponent<MeshRenderer>().bounds.size.y;
 
         GetPositions();
 
@@ -119,12 +121,12 @@ public class IslandController : MonoBehaviour {
         radius = islandWidth * islandSpacing;
 
         positions = new List<Vector3>();
-        positions.Add(new Vector3(0, 0, 0));
-
-        for (int i = 0; i < numIsland; i++)
+        for (int i = 0; i < islandAmount; i++)
         {
-            var angle = i * Mathf.PI * 2 / numIsland;
-            Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+            var angle = i * Mathf.PI * 2 / islandAmount;
+            var x = Mathf.Sin(angle) * radius;// *radiusX;
+            var z = Mathf.Cos(angle) * radius;// *radiusZ;
+            Vector3 pos = new Vector3(x, 0, z) + initialIsland.transform.position;
             positions.Add(pos);
         }
     }
@@ -134,11 +136,9 @@ public class IslandController : MonoBehaviour {
         radius = islandWidth * islandSpacing;
 
         positions = new List<Vector3>();
-        positions.Add(new Vector3(0, 0, 0));
-
-        for (int i = 0; i < numIsland; i++)
+        for (int i = 0; i < islandAmount; i++)
         {
-            var angle = ((float)i+Offset) * Mathf.PI * 2 / numIsland;
+            var angle = ((float)i+Offset) * Mathf.PI * 2 / islandAmount;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
             positions.Add(pos);
         }
@@ -152,7 +152,7 @@ public class IslandController : MonoBehaviour {
         foreach (GameObject island in islands)
         {
             temp = island.transform.position;
-            temp.y += Random.Range(-12f, 12f);
+            temp.y += Random.Range(-40f, 40f);
             island.transform.position = temp;
         }
     }
@@ -185,14 +185,19 @@ public class IslandController : MonoBehaviour {
 
     public void CheckForIslands()
     {
+        initialIsland = this.gameObject.transform.Find("InitialIsland").gameObject;
+
         if (islands.Count == 0)
         {
             islands = new List<GameObject>();
             islandAmount = 0;
             foreach (Transform child in transform)
             {
-                islandAmount++;
-                islands.Add(child.gameObject);
+                if (child.gameObject.tag == "Island")
+                {
+                    islandAmount++;
+                    islands.Add(child.gameObject);
+                }
             }
         }
     }
@@ -204,10 +209,10 @@ public class IslandController : MonoBehaviour {
 
         foreach (GameObject island in islands)
         {
-            random = Random.Range(-5f, 5f);
+            random = Random.Range(-30f, 30f);
             temp = island.transform.position;
             temp.x += random;
-            random = Random.Range(-5f, 5f);
+            random = Random.Range(-30f, 30f);
             temp.z += random;
             island.transform.position = temp;
         }

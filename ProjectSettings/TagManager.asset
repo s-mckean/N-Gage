@@ -8,6 +8,8 @@ TagManager:
   - CreatureArea
   - Enemy
   - GravityZone
+  - InitialIsland
+  - IslandController
   layers:
   - Default
   - TransparentFX

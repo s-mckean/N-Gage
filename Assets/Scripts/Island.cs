@@ -6,8 +6,8 @@ public class Island : MonoBehaviour {
 
     public float distanceUpward = 10f;
     public float distanceDownward = 10f;
-    public static float IslandMovementSpeed = 1;
-    private float islandSpeed = IslandMovementSpeed / 45;
+    public static float IslandMovementSpeed = 2;
+    private float islandSpeed = IslandMovementSpeed / 30;
     public bool moveUpward = true;
 
     private Vector3 originalPos = new Vector3();
