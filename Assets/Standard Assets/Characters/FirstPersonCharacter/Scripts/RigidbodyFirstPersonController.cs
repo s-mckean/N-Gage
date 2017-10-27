@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.FirstPerson
@@ -117,12 +119,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+        //Shawn code starts here
+        bool boostActive = false;
+        bool isBoostOnCooldown = false;
+        public float boostStrength = 100000;
+        public float boostCooldown;
+        public KeyCode boostKey = KeyCode.E;
+        Rigidbody Player;
+        
 
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
+
+            Player = GetComponent<Rigidbody>();
         }
 
 
@@ -134,6 +146,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jump = true;
             }
+
+            if (Input.GetKey(boostKey))
+                if (!isBoostOnCooldown)               
+                    StartCoroutine(JumpBoost());                
         }
 
 
@@ -177,7 +193,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                m_RigidBody.drag = 0f;
+                if(!boostActive) m_RigidBody.drag = 0f;
                 if (m_PreviouslyGrounded && !m_Jumping)
                 {
                     StickToGroundHelper();
@@ -260,6 +276,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jumping = false;
             }
+        }
+
+        IEnumerator JumpBoost()
+        {
+            isBoostOnCooldown = true;
+            Vector3 angle = cam.transform.forward;
+            Vector3 v = Player.velocity;
+            Player.AddForce(angle * boostStrength);
+            boostActive = true;
+            StartCoroutine(DragUpdater());
+            yield return new WaitForSeconds(boostCooldown);
+            isBoostOnCooldown = false;
+        }
+
+        IEnumerator DragUpdater()
+        {
+            Player.drag = 2;
+            yield return new WaitForSeconds(1);
+            boostActive = false;
         }
     }
 }
