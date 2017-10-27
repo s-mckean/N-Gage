@@ -21,14 +21,9 @@ public class Island : MonoBehaviour {
         originalPos = gameObject.transform.position;
     }
 
-    void Update()
+    public void triggeredUpdate()
     {
         floatUpDown();
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-            wrongPlacement = true;
     }
 
     void floatUpDown()

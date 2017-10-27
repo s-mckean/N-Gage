@@ -36,7 +36,7 @@ public class Playershooting : MonoBehaviour {
 
     IEnumerator Reload()
     {
-        Debug.Log("reloading");
+        //Debug.Log("reloading");
         yield return new WaitForSeconds(reloadTime);
         currentClip = clipSize;
     }

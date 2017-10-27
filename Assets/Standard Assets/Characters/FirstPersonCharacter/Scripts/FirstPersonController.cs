@@ -133,6 +133,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.UpdateCursorLock();
         }
 
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "GravityZone")
+            {
+                Debug.Log("Player Entered Island");
+                this.gameObject.transform.SetParent(other.gameObject.transform);
+            }
+        }
 
         private void PlayJumpSound()
         {
@@ -161,7 +169,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         private void PlayFootStepAudio()
-        {
+        {/*
             if (!m_CharacterController.isGrounded)
             {
                 return;
@@ -174,6 +182,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
+          * */
         }
 
 

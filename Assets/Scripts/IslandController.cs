@@ -11,9 +11,12 @@ public class IslandController : MonoBehaviour {
     private IslandController Instance;
     public int islandAmount = 5;
     public float islandSpacing = 4;
+    public bool rotateClockwise = true;
+    public float rotationSpeed = 1f;
     private float islandWidth;
     private float islandHeight;
     private int numIsland;
+    private float radius;
 
     private List<Vector3> positions = new List<Vector3>();
     private List<GameObject> islands = new List<GameObject>();
@@ -46,6 +49,21 @@ public class IslandController : MonoBehaviour {
         }
 	}
 
+    void FixedUpdate()
+    {
+        foreach (GameObject island in islands)
+        {
+            island.GetComponent<Island>().triggeredUpdate();
+        }
+
+        RotateIslands();
+    }
+
+    void RotateIslands()
+    {
+        
+    }
+
     public void GenerateIslands()
     {
         islandWidth = islandPrefab.GetComponent<MeshRenderer>().bounds.size.x;
@@ -74,7 +92,7 @@ public class IslandController : MonoBehaviour {
 
     public void GetPositions()
     {
-        float radius = islandWidth * islandSpacing;
+        radius = islandWidth * islandSpacing;
 
         positions = new List<Vector3>();
         positions.Add(new Vector3(0, 0, 0));
@@ -82,6 +100,21 @@ public class IslandController : MonoBehaviour {
         for (int i = 0; i < numIsland; i++)
         {
             var angle = i * Mathf.PI * 2 / numIsland;
+            Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+            positions.Add(pos);
+        }
+    }
+
+    public void GetPositions( float Offset )
+    {
+        radius = islandWidth * islandSpacing;
+
+        positions = new List<Vector3>();
+        positions.Add(new Vector3(0, 0, 0));
+
+        for (int i = 0; i < numIsland; i++)
+        {
+            var angle = ((float)i+Offset) * Mathf.PI * 2 / numIsland;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
             positions.Add(pos);
         }
@@ -150,6 +183,7 @@ public class IslandController : MonoBehaviour {
             random = Random.Range(-5f, 5f);
             temp = island.transform.position;
             temp.x += random;
+            random = Random.Range(-5f, 5f);
             temp.z += random;
             island.transform.position = temp;
         }
