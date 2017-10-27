@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -126,6 +127,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float boostCooldown;
         public KeyCode boostKey = KeyCode.E;
         Rigidbody Player;
+        public Text boostUI; 
         
 
         private void Start()
@@ -149,7 +151,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (Input.GetKey(boostKey))
                 if (!isBoostOnCooldown)               
-                    StartCoroutine(JumpBoost());                
+                    StartCoroutine(JumpBoost());
+            if (isBoostOnCooldown) boostUI.text = "Boost: on cooldown";
+            else boostUI.text = "Boost: good";
         }
 
 
