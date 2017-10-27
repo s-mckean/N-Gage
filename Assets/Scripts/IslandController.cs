@@ -37,6 +37,34 @@ public class IslandController : MonoBehaviour {
         foreach (GameObject island in islands)
         {
             island.GetComponent<Island>().triggeredStart();
+        }
+	}
+
+    void FixedUpdate()
+    {
+        foreach (GameObject island in islands)
+        {
+            island.GetComponent<Island>().triggeredUpdate();
+        }
+    }
+
+    public void RandomizeFloatDistances()
+    {
+        CheckForIslands();
+
+        foreach (GameObject island in islands)
+        {
+            island.GetComponent<Island>().distanceUpward += Random.Range(0, 10);
+            island.GetComponent<Island>().distanceDownward -= Random.Range(-10, 0);
+        }
+    }
+
+    public void RandomizeFloatDirections()
+    {
+        CheckForIslands();
+
+        foreach (GameObject island in islands)
+        {
             int temp = Random.Range(-2, 2);
             if (temp <= 0)
             {
@@ -47,21 +75,17 @@ public class IslandController : MonoBehaviour {
                 island.GetComponent<Island>().moveUpward = false;
             }
         }
-	}
-
-    void FixedUpdate()
-    {
-        foreach (GameObject island in islands)
-        {
-            island.GetComponent<Island>().triggeredUpdate();
-        }
-
-        RotateIslands();
     }
 
-    void RotateIslands()
+    public void RotateIslands()
     {
-        
+        CheckForIslands();
+
+        foreach (GameObject island in islands)
+        {
+            float rotation = Random.Range(-180f, 180f);
+            island.transform.Rotate(0,rotation,0);
+        }
     }
 
     public void GenerateIslands()
@@ -83,9 +107,9 @@ public class IslandController : MonoBehaviour {
     public void EraseIslands()
     {
         CheckForIslands();
-        foreach (GameObject child in islands)
+        foreach (GameObject island in islands)
         {
-            DestroyImmediate(child);
+            DestroyImmediate(island);
         }
         islands = new List<GameObject>();
     }

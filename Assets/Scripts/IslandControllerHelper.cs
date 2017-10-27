@@ -4,42 +4,57 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(IslandController))]
-public class CustomUnitGeneratorHelper : Editor
+public class CustomIslandControllerHelper : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        IslandController unitGenerator = (IslandController)target;
+        IslandController islandController = (IslandController)target;
 
         if (GUILayout.Button("Generate Islands"))
         {
-            unitGenerator.GenerateIslands();
+            islandController.GenerateIslands();
         }
 
-        if (GUILayout.Button("Erase Islands"))
+        else if (GUILayout.Button("Erase Islands"))
         {
-            unitGenerator.EraseIslands();
+            islandController.EraseIslands();
         }
 
-        if (GUILayout.Button("Randomize Heights"))
+        else if (GUILayout.Button("Randomize Heights"))
         {
-            unitGenerator.RandomizeHeights();
+            islandController.RandomizeHeights();
         }
 
-        if (GUILayout.Button("Randomize Scales"))
+        else if (GUILayout.Button("Randomize Scales"))
         {
-            unitGenerator.RandomizeScales();
+            islandController.RandomizeScales();
         }
 
-        if (GUILayout.Button("Increase Radius"))
+        else if (GUILayout.Button("Increase Radius"))
         {
-            unitGenerator.IncreaseRadius();
+            islandController.IncreaseRadius();
         }
 
-        if (GUILayout.Button("Randomize X and Y"))
+        else if (GUILayout.Button("Randomize X and Y"))
         {
-            unitGenerator.RandomizeXY();
+            islandController.RandomizeXY();
+        }
+
+        else if (GUILayout.Button("Randomize Rotations"))
+        {
+            islandController.RotateIslands();
+        }
+
+        else if (GUILayout.Button("Randomize Float Direction"))
+        {
+            islandController.RandomizeFloatDirections();
+        }
+
+        else if (GUILayout.Button("Randomize Float Distance"))
+        {
+            islandController.RandomizeFloatDistances();
         }
     }
 }
