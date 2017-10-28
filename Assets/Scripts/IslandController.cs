@@ -37,6 +37,8 @@ public class IslandController : MonoBehaviour {
 
         CheckForIslands();
 
+        initialIsland.GetComponent<InitialIsland>().TriggeredStart();
+
         foreach (GameObject island in islands)
         {
             island.GetComponent<Island>().triggeredStart();
@@ -58,6 +60,8 @@ public class IslandController : MonoBehaviour {
         {
             islandRing.transform.Rotate(0, -rotationSpeed / 30f, 0);
         }
+
+        initialIsland.GetComponent<InitialIsland>().TriggeredUpdate();
     }
 
     public void RandomizeFloatDistances()
