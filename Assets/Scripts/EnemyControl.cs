@@ -138,9 +138,11 @@ public class EnemyControl : MonoBehaviour
     {
         Vector3 toPlayerVector = transform.position - hero.position;
         //Debug.Log(toPlayerVector);
-        if (Mathf.Abs(toPlayerVector.x) < 5 && Mathf.Abs(toPlayerVector.z) < 5)
+        if (Mathf.Abs(toPlayerVector.x) < 20 && Mathf.Abs(toPlayerVector.z) < 20)
         {
-            Vector3 lookAtTransform = new Vector3(hero.position.x, hero.position.y - 0.8f, hero.position.z);
+            //Debug.Log("Player is in Range");
+            Vector3 lookAtTransform = new Vector3(hero.position.x, hero.position.y + 0.8f, hero.position.z);
+            //Debug.Log(lookAtTransform);
             transform.LookAt(lookAtTransform);
             transform.position = transform.position + (transform.rotation * new Vector3(0f, 0f, speed));
             return true;
