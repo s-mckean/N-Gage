@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class GeneratorTower : MonoBehaviour {
 
+    private GameObject lightningBolt;
+    private GameObject endPoint;
+
 	// Use this for initialization
-	void Start () {
-		
+	public void TriggeredStart () 
+    {
+        lightningBolt = this.transform.Find("SimpleLightningBoltPrefab").gameObject;
+        endPoint = lightningBolt.transform.Find("LightningEnd").gameObject;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void setEndPoint(Vector3 pos)
+    {
+        endPoint.transform.position = pos;
+    }
 }

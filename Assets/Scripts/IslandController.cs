@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class IslandController : MonoBehaviour {
+public class IslandController : MonoBehaviour
+{
 
     public GameObject islandPrefab;
     private GameObject _islandPrefab;
     public GameObject islandRing;
 
     private GameObject initialIsland;
+    private GameObject forceField;
 
     private IslandController Instance;
     public int islandAmount = 5;
@@ -23,9 +25,11 @@ public class IslandController : MonoBehaviour {
 
     private List<Vector3> positions = new List<Vector3>();
     private List<GameObject> islands = new List<GameObject>();
+    private List<GameObject> genTowers = new List<GameObject>();
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         if (Instance == null)
         {
             Instance = this;
@@ -38,18 +42,33 @@ public class IslandController : MonoBehaviour {
         CheckForIslands();
 
         initialIsland.GetComponent<InitialIsland>().TriggeredStart();
+        forceField = initialIsland.transform.Find("ForceField").gameObject;
 
         foreach (GameObject island in islands)
         {
             island.GetComponent<Island>().triggeredStart();
+            if (island.transform.Find("GeneratorTowerObject") != null)
+            {
+                genTowers.Add(island.transform.Find("GeneratorTowerObject").gameObject);
+            }
         }
-	}
+
+        foreach (GameObject tower in genTowers)
+        {
+            tower.GetComponent<GeneratorTower>().TriggeredStart();
+        }
+    }
 
     void FixedUpdate()
     {
         foreach (GameObject island in islands)
         {
             island.GetComponent<Island>().triggeredUpdate();
+        }
+
+        foreach (GameObject tower in genTowers)
+        {
+            tower.GetComponent<GeneratorTower>().setEndPoint(forceField.transform.position);
         }
 
         if (rotateClockwise)
@@ -100,7 +119,7 @@ public class IslandController : MonoBehaviour {
         foreach (GameObject island in islands)
         {
             float rotation = Random.Range(-180f, 180f);
-            island.transform.Rotate(0,rotation,0);
+            island.transform.Rotate(0, rotation, 0);
         }
     }
 
@@ -138,7 +157,7 @@ public class IslandController : MonoBehaviour {
         positions = new List<Vector3>();
         for (int i = 0; i < islandAmount; i++)
         {
-            float angle = ((1.0f*i) + spinOffset) * (Mathf.PI * 2.0f) / (1.0f*islandAmount);
+            float angle = ((1.0f * i) + spinOffset) * (Mathf.PI * 2.0f) / (1.0f * islandAmount);
             float x = Mathf.Sin(angle) * radius;// *radiusX;
             float z = Mathf.Cos(angle) * radius;// *radiusZ;
             Vector3 pos = new Vector3(x, 0f, z) + initialIsland.transform.position;
@@ -146,14 +165,14 @@ public class IslandController : MonoBehaviour {
         }
     }
 
-    public void GetPositions( float Offset )
+    public void GetPositions(float Offset)
     {
         radius = islandWidth * islandSpacing;
 
         positions = new List<Vector3>();
         for (int i = 0; i < islandAmount; i++)
         {
-            var angle = ((float)i+Offset) * Mathf.PI * 2 / islandAmount;
+            var angle = ((float)i + Offset) * Mathf.PI * 2 / islandAmount;
             Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
             positions.Add(pos);
         }
@@ -162,7 +181,7 @@ public class IslandController : MonoBehaviour {
     public void RandomizeHeights()
     {
         CheckForIslands();
-        Vector3 temp = new Vector3(0,0,0);      
+        Vector3 temp = new Vector3(0, 0, 0);
 
         foreach (GameObject island in islands)
         {
@@ -175,7 +194,7 @@ public class IslandController : MonoBehaviour {
     public void RandomizeScales()
     {
         CheckForIslands();
-        Vector3 temp = new Vector3(0,0,0);
+        Vector3 temp = new Vector3(0, 0, 0);
 
         foreach (GameObject island in islands)
         {
