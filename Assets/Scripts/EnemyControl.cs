@@ -130,8 +130,8 @@ public class EnemyControl : MonoBehaviour
     void Die()
     {
         // play sound effect
-        AudioController.instance.PlayGrandDaddySFX();
-        Destroy(gameObject);
+        //AudioController.instance.PlayGrandDaddySFX();
+        Destroy(this.gameObject);
     }
 
     public bool FollowPlayer()

@@ -211,7 +211,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.tag == "GravityZone")
             {
-                Debug.Log("Player Entered Island");
+                //Debug.Log("Player Entered Island");
                 this.gameObject.transform.SetParent(other.gameObject.transform, true);
             }
         }
