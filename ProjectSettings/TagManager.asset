@@ -11,6 +11,7 @@ TagManager:
   - InitialIsland
   - IslandController
   - Generator
+  - Boss
   layers:
   - Default
   - TransparentFX
