@@ -16,9 +16,14 @@ public class Island : MonoBehaviour {
     [HideInInspector]
     public bool wrongPlacement = false;
 
+    private GameObject gravityZone;
+    private GameObject genTower;
+
     public void triggeredStart()
     {
         originalPos = gameObject.transform.position;
+        gravityZone = this.gameObject.transform.Find("GravityZone").gameObject;
+        genTower = this.gameObject.transform.Find("GeneratorTowerObject").gameObject;
     }
 
     public void triggeredUpdate()
@@ -54,5 +59,27 @@ public class Island : MonoBehaviour {
                 gameObject.transform.position = pos;
             }
         }
+    }
+
+    public bool isGravityZoneEnemyFree()
+    {
+        foreach (Transform child in gravityZone.GetComponentsInChildren<Transform>())
+        {
+            if (child.gameObject.tag == "Enemy")
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void DestroyGenTower()
+    {
+        Destroy(genTower);
+    }
+
+    public GameObject getGenTower()
+    {
+        return genTower;
     }
 }

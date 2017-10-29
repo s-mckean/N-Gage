@@ -22,6 +22,7 @@ public class IslandController : MonoBehaviour
     private float islandHeight;
     private float radius;
     private float spinOffset = 0f;
+    private bool allGenTowersDestroyed = false;
 
     private List<Vector3> positions = new List<Vector3>();
     private List<GameObject> islands = new List<GameObject>();
@@ -64,11 +65,11 @@ public class IslandController : MonoBehaviour
         foreach (GameObject island in islands)
         {
             island.GetComponent<Island>().triggeredUpdate();
-        }
-
-        foreach (GameObject tower in genTowers)
-        {
-            tower.GetComponent<GeneratorTower>().setEndPoint(forceField.transform.position);
+            if (island.GetComponent<Island>().isGravityZoneEnemyFree())
+            {
+                island.GetComponent<Island>().DestroyGenTower();
+                genTowers.Remove(island.GetComponent<Island>().getGenTower());
+            }
         }
 
         if (rotateClockwise)
@@ -81,6 +82,29 @@ public class IslandController : MonoBehaviour
         }
 
         initialIsland.GetComponent<InitialIsland>().TriggeredUpdate();
+
+        if (allGenTowersDestroyed == false)
+        {
+            allGenTowersDestroyed = true;
+            foreach (GameObject tower in genTowers)
+            {
+                tower.GetComponent<GeneratorTower>().setEndPoint(forceField.transform.position);
+                allGenTowersDestroyed = false;
+            }
+        }
+        else
+        {
+            ReleaseBossEnemy();
+        }
+
+    }
+
+    public void ReleaseBossEnemy()
+    {
+        if (forceField != null)
+        {
+            Destroy(forceField);
+        }
     }
 
     public void RandomizeFloatDistances()

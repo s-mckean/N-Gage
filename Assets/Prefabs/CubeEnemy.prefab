@@ -122,4 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 50
-  hero: {fileID: 0}
+  hero: {fileID: 4425165203520950, guid: fc229346def80a6478d91b2223de43ee, type: 2}
