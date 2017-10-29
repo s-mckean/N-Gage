@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 81445292465220186}
   - component: {fileID: 114527322624538726}
   - component: {fileID: 124892286006332870}
+  - component: {fileID: 114132707737996270}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -146,6 +147,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1638908209703858}
   m_Enabled: 1
+--- !u!114 &114132707737996270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638908209703858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713df0870bc18d64a919008b5c80c1b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
+  clipSize: 10
+  reloadTime: 1
+  playerCam: {fileID: 0}
+  Canvas: {fileID: 0}
+  GunShots: {fileID: 1258731587370376, guid: ef8dda3714961f845b15cec027d22c6a, type: 2}
 --- !u!114 &114430605278782256
 MonoBehaviour:
   m_ObjectHideFlags: 1
