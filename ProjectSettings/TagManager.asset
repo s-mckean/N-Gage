@@ -12,6 +12,7 @@ TagManager:
   - IslandController
   - Generator
   - Boss
+  - NoFlyZone
   layers:
   - Default
   - TransparentFX

@@ -52,6 +52,16 @@ public class playerControl : MonoBehaviour
 
 	}
 
+	void Update() {
+		if(isInForceField) {
+			if(GameObject.FindGameObjectsWithTag("Generator").Length <= 0) {
+				isInForceField = false;
+			}
+		}
+
+		// start moving and attacking
+
+	}
 
 
 	public void Scream ()
