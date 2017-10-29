@@ -35,6 +35,8 @@ public class ForceFieldEmission : MonoBehaviour {
 			emissionColor.g = emissionColor.g * intensity * scalar;
 			emissionColor.b = emissionColor.b * intensity * scalar;
 			material.SetColor("_EmissionColor", emissionColor);
+
+			numberOfGenerator = currentCount;
 		}
 	}
 }
