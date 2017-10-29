@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class IslandController : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class IslandController : MonoBehaviour
     private List<Vector3> positions = new List<Vector3>();
     private List<GameObject> islands = new List<GameObject>();
     private List<GameObject> genTowers = new List<GameObject>();
+
+    public Text towerAmount;
 
     // Use this for initialization
     void Start()
@@ -97,6 +100,7 @@ public class IslandController : MonoBehaviour
             ReleaseBossEnemy();
         }
 
+        towerAmount.text = genTowers.Count.ToString();
     }
 
     public void ReleaseBossEnemy()
