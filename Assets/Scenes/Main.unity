@@ -601,7 +601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &894801373
 Transform:
   m_ObjectHideFlags: 0
@@ -845,6 +845,14 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.6592659
       objectReference: {fileID: 0}
+    - target: {fileID: 11403898, guid: 59c100dd669d88f46b60555886d4dae7, type: 2}
+      propertyPath: IdleAttackCollider
+      value: 
+      objectReference: {fileID: 95047586}
+    - target: {fileID: 11403898, guid: 59c100dd669d88f46b60555886d4dae7, type: 2}
+      propertyPath: FlyForwardCollider
+      value: 
+      objectReference: {fileID: 894801372}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 59c100dd669d88f46b60555886d4dae7, type: 2}
   m_IsPrefabParent: 0
@@ -897,6 +905,17 @@ GameObject:
   m_PrefabParentObject: {fileID: 1646426652906774, guid: dd29b0c8627c0d14f87ad29fc619c869,
     type: 2}
   m_PrefabInternal: {fileID: 296570400}
+--- !u!114 &2145263983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2145263982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda04826ceb920e4b921dc61a5b4dbde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2145263988
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,6 +4,9 @@ using System.Collections;
 public class playerControl : MonoBehaviour 
 {
 
+	public GameObject IdleAttackCollider;
+	public GameObject FlyForwardCollider;
+
 	bool isInForceField = true;
 
 	Animator anim;
@@ -45,12 +48,11 @@ public class playerControl : MonoBehaviour
 		idle02 = Animator.StringToHash("Idle02");
 	}
 
+	void Start() {
 
-	public void StartAttacking() {
-		if(isInForceField) {
-
-		}
 	}
+
+
 
 	public void Scream ()
 	{
