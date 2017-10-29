@@ -158,7 +158,30 @@ public class playerControl : MonoBehaviour
 		transform.position = transform.position + (transform.rotation * (new Vector3(0.0f, 0.0f, speed)));
 
 		// bound checking
-
+		if(transform.position.x > X_BOUND.y) { // positive x bound
+			if(transform.forward.y >= transform.position.y) {
+				// was going up so rotate 
+				transform.Rotate(zAxis, 90.0f * Mathf.Deg2Rad);
+			}
+			else {
+				// was going down so rotate
+				transform.Rotate(zAxis, -90.0f * Mathf.Deg2Rad);
+			}
+			rotateZ = 0.0f;
+		}
+		else if(transform.position.x < X_BOUND.x) { // neative x bound
+			if(transform.forward.y >= transform.position.y) {
+				// was going up so rotate 
+				transform.Rotate(zAxis, -90.0f * Mathf.Deg2Rad);
+			}
+			else {
+				// was going down so rotate
+				transform.Rotate(zAxis, 90.0f * Mathf.Deg2Rad);
+			}
+			rotateZ = 0.0f;
+		}
+		
+		
 	}
 
 
