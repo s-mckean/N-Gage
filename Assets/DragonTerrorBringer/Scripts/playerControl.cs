@@ -42,7 +42,7 @@ public class playerControl : MonoBehaviour
 		flyGlide = Animator.StringToHash("Fly Glide");
 		land = Animator.StringToHash("Land");
 		die = Animator.StringToHash("Die");
-		idle02 = Animator.StringToHash("Idle02");	
+		idle02 = Animator.StringToHash("Idle02");
 	}
 
 
