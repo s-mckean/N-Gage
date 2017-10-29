@@ -1265,6 +1265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IdleAttackCollider: {fileID: 496747586}
   FlyForwardCollider: {fileID: 619617709}
+  avoidObsIdleAttack: {fileID: 746509674}
+  avoidObsFlyFoward: {fileID: 711962536}
 --- !u!95 &269890967
 Animator:
   serializedVersion: 3
@@ -3950,6 +3952,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 708743281}
   m_Mesh: {fileID: 4300000, guid: 07b7d58ca64f23042bf83c602492e125, type: 3}
+--- !u!1 &711962536 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1586625520415386, guid: 16f55e90450455e428611475c907bb27,
+    type: 2}
+  m_PrefabInternal: {fileID: 130712559}
 --- !u!4 &711962537 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4437811386377740, guid: 16f55e90450455e428611475c907bb27,
@@ -4105,6 +4112,11 @@ Transform:
   m_Father: {fileID: 420212497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &746509674 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1282224939449052, guid: 1ccc0dca56575014ea2235b375c635d3,
+    type: 2}
+  m_PrefabInternal: {fileID: 894891818}
 --- !u!4 &746509675 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4975193096930768, guid: 1ccc0dca56575014ea2235b375c635d3,
