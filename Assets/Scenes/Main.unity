@@ -3047,6 +3047,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223749317767215044, guid: e6243bc90e50fe24387d83efba130e68,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223749317767215044, guid: e6243bc90e50fe24387d83efba130e68,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1476572372}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6243bc90e50fe24387d83efba130e68, type: 2}
   m_IsPrefabParent: 0
@@ -3772,8 +3782,8 @@ Canvas:
   m_GameObject: {fileID: 550775020}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1476572372}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
