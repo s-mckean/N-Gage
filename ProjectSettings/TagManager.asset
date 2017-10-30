@@ -13,6 +13,8 @@ TagManager:
   - Generator
   - Boss
   - NoFlyZone
+  - DoNotDetect
+  - BossBody
   layers:
   - Default
   - TransparentFX

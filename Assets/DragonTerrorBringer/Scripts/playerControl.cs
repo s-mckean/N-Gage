@@ -71,7 +71,7 @@ public class playerControl : MonoBehaviour
 	float chargeUPAnimationTimer = 3.26f;
 	const float CHARGEUP_ANIMATION_LIMIT = 3.26f;	// the number is from the animation "Fly Flame Attack" of the dragon mesh
 
-	float speedMultiplier = 3.0f;	// in firing mode .. make the dragon travel faster
+	float speedMultiplier = 2.0f;	// in firing mode .. make the dragon travel faster
 	bool isInFiringPosition = false;
 	bool isNOTup	= true;
 
@@ -177,7 +177,7 @@ public class playerControl : MonoBehaviour
 		if(!isFireMode && ( (fireTimer += delta) >= fireTimeLimit)) {
 			isFireMode = true;
 			isInFiringPosition = false;
-			isNOTup = true;
+			isNOTup = true; // a check to make sure it's right side up
 		}
 
 		if(isFireMode) {
@@ -185,7 +185,8 @@ public class playerControl : MonoBehaviour
 				chargeUPAnimationTimer -= delta;
 				if(chargeUPAnimationTimer <= 0.0f) {
 					// fire projectile
-					Debug.Log("BOSS FIRE PROJECTILE");
+					//Debug.Log("BOSS FIRE PROJECTILE");
+					
 
 					// change animation back into movement
 					PlayFlyAnimation();
@@ -197,9 +198,20 @@ public class playerControl : MonoBehaviour
 				}
 			}
 			else {				
-				// flip right side up
-				if(isNOTup && transform.up.y < 0.0f) { // flip right side up
-					transform.Rotate(zAxis, 180.0f * Mathf.Deg2Rad);
+				// check if boss is right side up
+				if(isNOTup) { 
+
+					if(transform.up.x < 0.0f || transform.up.y < 0.0f || transform.up.z < 0.0f) { // flip right side up
+						transform.Rotate(zAxis, 160.0f * Mathf.Deg2Rad);
+					}
+
+					// check if right vector is pointing down, if yes rotate a bit more
+					if(transform.right.x < 0.0f || transform.right.y < 0.0f || transform.right.z < 0.0f) {
+						transform.Rotate(zAxis, 40.0f * Mathf.Deg2Rad);
+						//Debug.Log("Right: " + transform.right);
+					}
+
+					isNOTup = false;
 				}
 				else {
 
