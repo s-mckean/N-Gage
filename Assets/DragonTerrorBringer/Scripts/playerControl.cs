@@ -4,6 +4,8 @@ using System.Collections;
 public class playerControl : MonoBehaviour 
 {
 
+	public Transform playerTransform;
+
 	// for player to shoot at the boss
 	public GameObject IdleAttackCollider;
 	public GameObject FlyForwardCollider;
@@ -13,10 +15,11 @@ public class playerControl : MonoBehaviour
 
 	bool isInForceField = false;
 	 
-	readonly Vector2 X_BOUND = new Vector2(-778.0f, 778.0f);
-	readonly Vector2 Y_BOUND = new Vector2(-320.0f, 380.0f);
-	readonly Vector2 Z_BOUND = new Vector2(-848.0f, 848.0f);
+	//readonly Vector2 X_BOUND = new Vector2(-778.0f, 778.0f);
+	//readonly Vector2 Y_BOUND = new Vector2(-320.0f, 380.0f);
+	//readonly Vector2 Z_BOUND = new Vector2(-848.0f, 848.0f);
 
+	const float MAX_DISTANT_FROM_PLAYER = 800.0f;
 
 	// movement
 	float speed = 2.0f;
@@ -28,6 +31,11 @@ public class playerControl : MonoBehaviour
     const float UPPER_MOVE_TIME = 1.0f;	
 
 	// for turing
+	bool isRotatingTowardPlayer = false;
+	float angleBetweenSelfAndPlayer = 0.0f;
+	Vector3 currentAxisRotation;
+	float tempRotateAngle;
+
 	float rotateTime = 0.0f;
 	float rotateTimeLimit;
 	const float LOWER_ROTATETIME = 2.0f;
@@ -114,7 +122,9 @@ public class playerControl : MonoBehaviour
 				FlyForwardCollider.SetActive(true);
 				avoidObsIdleAttack.SetActive(false);
 				avoidObsFlyFoward.SetActive(true);
-				transform.parent = null;				
+				transform.parent = null;	
+				
+				return;			
 			}
 		}
 
@@ -122,66 +132,110 @@ public class playerControl : MonoBehaviour
 
 		float delta = Time.deltaTime;	
 
-		// rotating
-		if(isRotating) {
-			if(isRotateX) {					
-				transform.Rotate(xAxis, rotateX);
-			}
-			if(isRotateY) {
-				transform.Rotate(yAxis, rotateY);
-			}
-			if(isRotateZ) {
-				transform.Rotate(zAxis, rotateZ);
-			}
+		if(isRotatingTowardPlayer) {
+			transform.Rotate(currentAxisRotation, tempRotateAngle);
 
-			// rotate time is up so no more rotating
-			if( (rotateTime += delta) >= rotateTimeLimit) {
-				isRotating = false;
+			if(tempRotateAngle >= 0.0f) {
+				angleBetweenSelfAndPlayer -= tempRotateAngle;
+				if(angleBetweenSelfAndPlayer <= 0.0f) {
+					isRotatingTowardPlayer = false;
+				}
+			}
+			else {
+				angleBetweenSelfAndPlayer += tempRotateAngle;
+				if(angleBetweenSelfAndPlayer >= 0.0f) {
+					isRotatingTowardPlayer = false;
+				}
 			}
 		}
-		else {
-			// rolette
-			isRotating = System.Convert.ToBoolean(Random.Range(0, 2));
+		else { 
+			// rotating
 			if(isRotating) {
-				rotateTimeLimit = Random.Range(LOWER_ROTATETIME, UPPER_ROTATETIME);
-				rotateTime = 0.0f;
-				isRotateX = System.Convert.ToBoolean(Random.Range(0, 2));
-				isRotateY = System.Convert.ToBoolean(Random.Range(0, 2));
-				isRotateZ = System.Convert.ToBoolean(Random.Range(0, 2));
+				if(isRotateX) {					
+					transform.Rotate(xAxis, rotateX);
+				}
+				if(isRotateY) {
+					transform.Rotate(yAxis, rotateY);
+				}
+				if(isRotateZ) {
+					transform.Rotate(zAxis, rotateZ);
+				}
 
-				rotateX *= (Random.Range(0, 2) == 0 ? 1 : -1);
-				rotateY *= (Random.Range(0, 2) == 0 ? 1 : -1);
-				rotateZ *= (Random.Range(0, 2) == 0 ? 1 : -1);
-			}
-		}
-
-		transform.position = transform.position + (transform.rotation * (new Vector3(0.0f, 0.0f, speed)));
-
-		// bound checking
-		if(transform.position.x > X_BOUND.y) { // positive x bound
-			if(transform.forward.y >= transform.position.y) {
-				// was going up so rotate 
-				transform.Rotate(zAxis, 90.0f * Mathf.Deg2Rad);
+				// rotate time is up so no more rotating
+				if( (rotateTime += delta) >= rotateTimeLimit) {
+					isRotating = false;
+				}
 			}
 			else {
-				// was going down so rotate
-				transform.Rotate(zAxis, -90.0f * Mathf.Deg2Rad);
+				// rolette
+				isRotating = System.Convert.ToBoolean(Random.Range(0, 2));
+				if(isRotating) {
+					rotateTimeLimit = Random.Range(LOWER_ROTATETIME, UPPER_ROTATETIME);
+					rotateTime = 0.0f;
+					isRotateX = System.Convert.ToBoolean(Random.Range(0, 2));
+					isRotateY = System.Convert.ToBoolean(Random.Range(0, 2));
+					isRotateZ = System.Convert.ToBoolean(Random.Range(0, 2));
+
+					rotateX *= (Random.Range(0, 2) == 0 ? 1 : -1);
+					rotateY *= (Random.Range(0, 2) == 0 ? 1 : -1);
+					rotateZ *= (Random.Range(0, 2) == 0 ? 1 : -1);
+				}
 			}
-			rotateZ = 0.0f;
 		}
-		else if(transform.position.x < X_BOUND.x) { // neative x bound
-			if(transform.forward.y >= transform.position.y) {
-				// was going up so rotate 
-				transform.Rotate(zAxis, -90.0f * Mathf.Deg2Rad);
-			}
-			else {
-				// was going down so rotate
-				transform.Rotate(zAxis, 90.0f * Mathf.Deg2Rad);
-			}
-			rotateZ = 0.0f;
+
+		transform.position = transform.position + (transform.rotation * (new Vector3(0.0f, 0.0f, speed)));		
+
+		Vector3 targetDir = playerTransform.position - transform.position;
+		// if too far away from player turn back toward player.
+		if(!isRotatingTowardPlayer && targetDir.sqrMagnitude >= (MAX_DISTANT_FROM_PLAYER * MAX_DISTANT_FROM_PLAYER)) {
+			angleBetweenSelfAndPlayer = Vector3.Angle(transform.forward, targetDir) * Mathf.Deg2Rad;
+			isRotatingTowardPlayer = true;
+			isRotating = false;
+
+			tempRotateAngle = ROTATE_ANGLE;
+			currentAxisRotation = xAxis;
+
+			Debug.Log(angleBetweenSelfAndPlayer);
+			//// which axis to rotation from
+			//float absX = Mathf.Abs(targetDir.x);
+			//float absY = Mathf.Abs(targetDir.y);
+			//float absZ = Mathf.Abs(targetDir.z);
+
+			//tempRotateAngle = ROTATE_ANGLE;
+
+			//// default to rotate via the x axis
+			//if(absY > absX && absY > absZ) {
+			//	if(Random.Range(0, 2) == 0) {
+			//		currentAxisRotation = zAxis;
+			//	}
+			//	else {
+			//		currentAxisRotation = xAxis;
+			//	}
+			//}
+			//else if(absZ > absX && absZ > absY) {
+			//	if(Random.Range(0, 2) == 0) {
+			//		currentAxisRotation = yAxis;
+			//	}
+			//	else {
+			//		currentAxisRotation = xAxis;
+			//	}
+				
+			//	if(targetDir.z >= 0.0f) {
+			//		tempRotateAngle = -ROTATE_ANGLE;
+			//		angleBetweenSelfAndPlayer *= -1;
+			//	}			
+			//}
+			//else {
+			//	// default to rotate via the x axis
+			//	currentAxisRotation = xAxis;
+			//	if(targetDir.x >= 0.0f) {
+			//		tempRotateAngle = -ROTATE_ANGLE;
+			//		angleBetweenSelfAndPlayer *= -1;
+			//	}
+			//}
+
+
 		}
-		
-		
 	}
 
 
