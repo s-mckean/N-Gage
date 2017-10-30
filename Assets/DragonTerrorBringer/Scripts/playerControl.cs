@@ -133,20 +133,26 @@ public class playerControl : MonoBehaviour
 		float delta = Time.deltaTime;	
 
 		if(isRotatingTowardPlayer) {
-			transform.Rotate(currentAxisRotation, tempRotateAngle);
+			transform.Rotate(xAxis, tempRotateAngle);
+			angleBetweenSelfAndPlayer -= tempRotateAngle;
+			if(angleBetweenSelfAndPlayer <= 0.0f) {
+				isRotatingTowardPlayer = false;
+			}
+		
 
-			if(tempRotateAngle >= 0.0f) {
-				angleBetweenSelfAndPlayer -= tempRotateAngle;
-				if(angleBetweenSelfAndPlayer <= 0.0f) {
-					isRotatingTowardPlayer = false;
-				}
-			}
-			else {
-				angleBetweenSelfAndPlayer += tempRotateAngle;
-				if(angleBetweenSelfAndPlayer >= 0.0f) {
-					isRotatingTowardPlayer = false;
-				}
-			}
+			//transform.Rotate(currentAxisRotation, tempRotateAngle);
+			//if(tempRotateAngle >= 0.0f) {
+			//	angleBetweenSelfAndPlayer -= tempRotateAngle;
+			//	if(angleBetweenSelfAndPlayer <= 0.0f) {
+			//		isRotatingTowardPlayer = false;
+			//	}
+			//}
+			//else {
+			//	angleBetweenSelfAndPlayer += tempRotateAngle;
+			//	if(angleBetweenSelfAndPlayer >= 0.0f) {
+			//		isRotatingTowardPlayer = false;
+			//	}
+			//}
 		}
 		else { 
 			// rotating
@@ -193,7 +199,7 @@ public class playerControl : MonoBehaviour
 			isRotating = false;
 
 			tempRotateAngle = ROTATE_ANGLE;
-			currentAxisRotation = xAxis;
+			//currentAxisRotation = xAxis;
 
 			Debug.Log(angleBetweenSelfAndPlayer);
 			//// which axis to rotation from
