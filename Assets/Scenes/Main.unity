@@ -2996,7 +2996,7 @@ GameObject:
   - component: {fileID: 496747588}
   m_Layer: 0
   m_Name: FlyIdleAttkCollider
-  m_TagString: Untagged
+  m_TagString: BossBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3681,7 +3681,7 @@ GameObject:
   - component: {fileID: 619617711}
   m_Layer: 0
   m_Name: FlyForward
-  m_TagString: Untagged
+  m_TagString: BossBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9413,66 +9413,6 @@ Prefab:
     - target: {fileID: 4908031445546030, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
       propertyPath: m_RootOrder
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666652858129886, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666652858129886, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4666652858129886, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905996353381586, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905996353381586, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4905996353381586, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462352019441484, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462352019441484, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462352019441484, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869981563180546, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869981563180546, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869981563180546, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437064745879920, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437064745879920, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437064745879920, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7172129931a2ce469aca6cc31ee3af4, type: 2}
