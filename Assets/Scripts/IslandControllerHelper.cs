@@ -13,50 +13,16 @@ public class CustomIslandControllerHelper : Editor
 
         IslandController islandController = (IslandController)target;
 
-        if (GUILayout.Button("Generate Islands"))
+        if (GUILayout.Button("Generate Rings"))
         {
-            islandController.GenerateIslands();
+            islandController.GenerateRings();
         }
 
-        else if (GUILayout.Button("Erase Islands"))
+        else if (GUILayout.Button("Erase Rings"))
         {
-            islandController.EraseIslands();
+            islandController.EraseRings();
         }
 
-        else if (GUILayout.Button("Randomize Heights"))
-        {
-            islandController.RandomizeHeights();
-        }
-
-        else if (GUILayout.Button("Randomize Scales"))
-        {
-            islandController.RandomizeScales();
-        }
-
-        else if (GUILayout.Button("Increase Radius"))
-        {
-            islandController.IncreaseRadius();
-        }
-
-        else if (GUILayout.Button("Randomize X and Y"))
-        {
-            islandController.RandomizeXY();
-        }
-
-        else if (GUILayout.Button("Randomize Rotations"))
-        {
-            islandController.RotateIslands();
-        }
-
-        else if (GUILayout.Button("Randomize Float Direction"))
-        {
-            islandController.RandomizeFloatDirections();
-        }
-
-        else if (GUILayout.Button("Randomize Float Distance"))
-        {
-            islandController.RandomizeFloatDistances();
-        }
     }
 }
 #endif

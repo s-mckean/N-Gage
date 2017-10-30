@@ -19,6 +19,8 @@ public class Island : MonoBehaviour {
     private GameObject gravityZone;
     private GameObject genTower;
 
+    public int ringPosition = 1;
+
     public void triggeredStart()
     {
         originalPos = gameObject.transform.position;
