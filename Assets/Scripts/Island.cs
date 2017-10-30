@@ -33,7 +33,10 @@ public class Island : MonoBehaviour
     public void triggeredUpdate( Vector3 forceFieldPos )
     {
         floatUpDown();
-        genTower.GetComponent<GeneratorTower>().setEndPoint(forceFieldPos);
+        if (genTower != null)
+        {
+            genTower.GetComponent<GeneratorTower>().setEndPoint(forceFieldPos);
+        }
     }
 
     void floatUpDown()
