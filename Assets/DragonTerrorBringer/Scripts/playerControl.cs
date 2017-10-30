@@ -13,6 +13,10 @@ public class playerControl : MonoBehaviour
 	public GameObject avoidObsIdleAttack;
 	public GameObject avoidObsFlyFoward;
 
+	// help us orientate the boss during the firing
+	public GameObject bellyObj;
+	public GameObject backObj;
+
 	bool isInForceField = false;
 	 
 	//readonly Vector2 X_BOUND = new Vector2(-778.0f, 778.0f);
@@ -23,7 +27,7 @@ public class playerControl : MonoBehaviour
 
 	// movement
 	float speed = 2.0f;
-	float probabiliyOfStandingStill = 0.4f;
+	//float probabiliyOfStandingStill = 0.4f;
 
 	float moveTimer = 0.0f;
     float moveTimeLimit = 0.0f;
@@ -47,7 +51,7 @@ public class playerControl : MonoBehaviour
 	bool isRotateZ = false;
 	
 	const float ROTATE_ANGLE = 20.0f * Mathf.Deg2Rad;
-	const float SHARP_ROTATE_ANGLE = 50.0f * Mathf.Deg2Rad;
+	const float SHARP_ROTATE_ANGLE = 40.0f * Mathf.Deg2Rad;
 
 	float rotateX = ROTATE_ANGLE;
 	float rotateY = ROTATE_ANGLE;
@@ -58,6 +62,20 @@ public class playerControl : MonoBehaviour
 	readonly Vector3 zAxis = new Vector3(0.0f, 0.0f, 1.0f);
 
 
+	// attack
+	float fireTimer = 0.0f;
+	float fireTimeLimit;
+	bool isFireMode = false;
+	const float LOWER_FIRE_LIMIT = 1.0f;
+	const float UPPER_FIRE_LIMIT = 10.0f;
+	float chargeUPAnimationTimer = 3.26f;
+	const float CHARGEUP_ANIMATION_LIMIT = 3.26f;	// the number is from the animation "Fly Flame Attack" of the dragon mesh
+
+	float speedMultiplier = 3.0f;	// in firing mode .. make the dragon travel faster
+	bool isInFiringPosition = false;
+	bool isNOTup	= true;
+
+	#region Animator
 	Animator anim;
 	int scream;
 	int basicAttack;
@@ -75,6 +93,8 @@ public class playerControl : MonoBehaviour
 	int land;
 	int die;
 	int idle02;
+	#endregion
+
 
 	void Awake () 
 	{
@@ -107,30 +127,108 @@ public class playerControl : MonoBehaviour
 	void Start() {
 		moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
 
+		fireTimeLimit = Random.Range(LOWER_FIRE_LIMIT, UPPER_FIRE_LIMIT);
+
 		// remove after testing
 		transform.parent = null;
 	}
 
+
+
+	void PlayFlyAnimation() {
+		//anim.SetTrigger(flyForward);	
+		IdleAttackCollider.SetActive(false);
+		FlyForwardCollider.SetActive(true);
+		avoidObsIdleAttack.SetActive(false);
+		avoidObsFlyFoward.SetActive(true);
+	}
+
+	void PlayAttackAnimation() {
+		anim.SetTrigger(flyFlameAttack);	
+		IdleAttackCollider.SetActive(true);
+		FlyForwardCollider.SetActive(false);
+		avoidObsIdleAttack.SetActive(true);
+		avoidObsFlyFoward.SetActive(false);
+	}
+
 	void Update() {
+		//Debug.Log(transform.up);
+		//return;
+
 		if(isInForceField) {
 			if(GameObject.FindGameObjectsWithTag("Generator").Length <= 0) {
 				isInForceField = false;
 				
 				// change animation and collider
 				anim.SetTrigger(flyForward);	
-				IdleAttackCollider.SetActive(false);
-				FlyForwardCollider.SetActive(true);
-				avoidObsIdleAttack.SetActive(false);
-				avoidObsFlyFoward.SetActive(true);
+				PlayFlyAnimation();
+
 				transform.parent = null;	
-				
-				return;			
 			}
+
+			return;
 		}
 
 		// start moving and attacking
 
-		float delta = Time.deltaTime;	
+		float delta = Time.deltaTime;
+
+		#region Fire
+		if(!isFireMode && ( (fireTimer += delta) >= fireTimeLimit)) {
+			isFireMode = true;
+			isInFiringPosition = false;
+			isNOTup = true;
+		}
+
+		if(isFireMode) {
+			if(isInFiringPosition) {
+				chargeUPAnimationTimer -= delta;
+				if(chargeUPAnimationTimer <= 0.0f) {
+					// fire projectile
+					Debug.Log("BOSS FIRE PROJECTILE");
+
+					// change animation back into movement
+					PlayFlyAnimation();
+					chargeUPAnimationTimer = CHARGEUP_ANIMATION_LIMIT;
+					isFireMode = false;
+					fireTimer = 0.0f;
+					fireTimeLimit = Random.Range(LOWER_FIRE_LIMIT, UPPER_FIRE_LIMIT);
+					return;
+				}
+			}
+			else {				
+				// flip right side up
+				if(isNOTup && transform.up.y < 0.0f) { // flip right side up
+					transform.Rotate(zAxis, 180.0f * Mathf.Deg2Rad);
+				}
+				else {
+
+					// is the boss below the player?
+					if(transform.position.y < playerTransform.position.y) {	// make sure the dragon is really above the player
+						// now move until boss is above the player
+						transform.position = transform.position + (new Vector3(0.0f, speed * speedMultiplier, 0.0f));
+					}
+					else {
+
+						// do we need to flip the boss around so the belly face the player
+						float bellyDistance = (bellyObj.transform.position - playerTransform.position).magnitude;
+						float backDistrance = (backObj.transform.position - playerTransform.position).magnitude;
+
+						if(backDistrance < bellyDistance) {
+							transform.Rotate(xAxis, 180.0f * Mathf.Deg2Rad);
+						}
+
+						// boss is above the player
+						PlayAttackAnimation();
+						isInFiringPosition = true;
+					}
+				}
+			}
+
+			return;
+		}
+		#endregion
+
 
 		if(isRotatingTowardPlayer) {
 			transform.Rotate(xAxis, tempRotateAngle);
@@ -201,7 +299,7 @@ public class playerControl : MonoBehaviour
 			tempRotateAngle = ROTATE_ANGLE;
 			//currentAxisRotation = xAxis;
 
-			Debug.Log(angleBetweenSelfAndPlayer);
+			//Debug.Log(angleBetweenSelfAndPlayer);
 			//// which axis to rotation from
 			//float absX = Mathf.Abs(targetDir.x);
 			//float absY = Mathf.Abs(targetDir.y);
