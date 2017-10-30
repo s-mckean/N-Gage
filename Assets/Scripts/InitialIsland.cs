@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InitialIsland : MonoBehaviour {
 
+    /*
     private GameObject forceField;
     private Rigidbody ffRigidBody;
     public float maxVerticalSpeed = 5000f;
@@ -53,4 +54,5 @@ public class InitialIsland : MonoBehaviour {
     {
 
     }
+     * */
 }

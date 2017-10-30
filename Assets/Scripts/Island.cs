@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Island : MonoBehaviour {
+public class Island : MonoBehaviour
+{
 
     public float distanceUpward = 10f;
     public float distanceDownward = 10f;
@@ -26,11 +27,13 @@ public class Island : MonoBehaviour {
         originalPos = gameObject.transform.position;
         gravityZone = this.gameObject.transform.Find("GravityZone").gameObject;
         genTower = this.gameObject.transform.Find("GeneratorTowerObject").gameObject;
+        genTower.GetComponent<GeneratorTower>().TriggeredStart();
     }
 
-    public void triggeredUpdate()
+    public void triggeredUpdate( Vector3 forceFieldPos )
     {
         floatUpDown();
+        genTower.GetComponent<GeneratorTower>().setEndPoint(forceFieldPos);
     }
 
     void floatUpDown()

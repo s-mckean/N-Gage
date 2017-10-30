@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IslandRing : MonoBehaviour {
+public class IslandRing : MonoBehaviour
+{
 
     public GameObject islandPrefab;
     private GameObject _islandPrefab;
@@ -21,17 +22,18 @@ public class IslandRing : MonoBehaviour {
     [HideInInspector]
     private List<GameObject> genTowers = new List<GameObject>();
 
-    public bool allGenTowersDestroyed = false;
-
-	// Use this for initialization
-	public void TriggeredStart () 
+    // Use this for initialization
+    public void TriggeredStart()
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            island.gameObject.GetComponent<Island>().triggeredStart();
-            if (island.transform.Find("GeneratorTowerObject") != null)
+            if (island.GetComponent<Island>() != null)
             {
-                genTowers.Add(island.transform.Find("GeneratorTowerObject").gameObject);
+                island.gameObject.GetComponent<Island>().triggeredStart();
+                if (island.transform.Find("GeneratorTowerObject") != null)
+                {
+                    genTowers.Add(island.transform.Find("GeneratorTowerObject").gameObject);
+                }
             }
         }
 
@@ -39,47 +41,46 @@ public class IslandRing : MonoBehaviour {
         {
             tower.GetComponent<GeneratorTower>().TriggeredStart();
         }
-	}
-	
-	// Update is called once per frame
-	public void TriggeredUpdate ( Vector3 forceFieldPos ) 
+        genTowerAmount = genTowers.Count;
+    }
+
+    // Update is called once per frame
+    public void TriggeredUpdate(Vector3 forceFieldPos)
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            island.gameObject.GetComponent<Island>().triggeredUpdate();
-            if (island.gameObject.GetComponent<Island>().isGravityZoneEnemyFree())
+            if (island.GetComponent<Island>() != null)
             {
-                island.gameObject.GetComponent<Island>().DestroyGenTower();
-                genTowers.Remove(island.gameObject.GetComponent<Island>().getGenTower());
+                island.gameObject.GetComponent<Island>().triggeredUpdate( forceFieldPos );
+
+                if (island.gameObject.GetComponent<Island>().isGravityZoneEnemyFree())
+                {
+                    island.gameObject.GetComponent<Island>().DestroyGenTower();
+                    genTowers.Remove(island.gameObject.GetComponent<Island>().getGenTower());
+                    genTowerAmount = genTowers.Count;
+                }
             }
         }
 
         if (rotateClockwise)
         {
-            transform.Rotate(0, rotationSpeed / 30f, 0);
+            this.transform.Rotate(0, rotationSpeed / 30f, 0);
         }
         else
         {
-            transform.Rotate(0, -rotationSpeed / 30f, 0);
+            this.transform.Rotate(0, -rotationSpeed / 30f, 0);
         }
-
-        if (allGenTowersDestroyed == false)
-        {
-            allGenTowersDestroyed = true;
-            foreach (GameObject tower in genTowers)
-            {
-                tower.GetComponent<GeneratorTower>().setEndPoint(forceFieldPos);
-                allGenTowersDestroyed = false;
-            }
-        }
-	}
+    }
 
     public void RandomizeFloatDistances()
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            island.gameObject.GetComponent<Island>().distanceUpward += Random.Range(0, 10);
-            island.gameObject.GetComponent<Island>().distanceDownward -= Random.Range(-10, 0);
+            if (island.GetComponent<Island>() != null)
+            {
+                island.GetComponent<Island>().distanceUpward += Random.Range(0, 10);
+                island.GetComponent<Island>().distanceDownward -= Random.Range(-10, 0);
+            }
         }
     }
 
@@ -87,14 +88,17 @@ public class IslandRing : MonoBehaviour {
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            int temp = Random.Range(-2, 2);
-            if (temp <= 0)
+            if (island.GetComponent<Island>() != null)
             {
-                island.gameObject.GetComponent<Island>().moveUpward = true;
-            }
-            else
-            {
-                island.gameObject.GetComponent<Island>().moveUpward = false;
+                int temp = Random.Range(-2, 2);
+                if (temp <= 0)
+                {
+                    island.GetComponent<Island>().moveUpward = true;
+                }
+                else
+                {
+                    island.GetComponent<Island>().moveUpward = false;
+                }
             }
         }
     }
@@ -103,8 +107,11 @@ public class IslandRing : MonoBehaviour {
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            float rotation = Random.Range(-180f, 180f);
-            island.gameObject.transform.Rotate(0, rotation, 0);
+            if (island.GetComponent<Island>() != null)
+            {
+                float rotation = Random.Range(-180f, 180f);
+                island.gameObject.transform.Rotate(0, rotation, 0);
+            }
         }
     }
 
@@ -123,7 +130,10 @@ public class IslandRing : MonoBehaviour {
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            DestroyImmediate(island.gameObject);
+            if (island.GetComponent<Island>() != null)
+            {
+                DestroyImmediate(island.gameObject);
+            }
         }
     }
 
@@ -133,8 +143,8 @@ public class IslandRing : MonoBehaviour {
         for (int i = 0; i < islandAmount; i++)
         {
             float angle = (1.0f * i) * (Mathf.PI * 2.0f) / (1.0f * islandAmount);
-            float x = Mathf.Sin(angle) *RadiusX;
-            float z = Mathf.Cos(angle) *RadiusZ;
+            float x = Mathf.Sin(angle) * RadiusX;
+            float z = Mathf.Cos(angle) * RadiusZ;
             Vector3 pos = new Vector3(x, 0f, z) + centerPoint;
             positions.Add(pos);
         }
@@ -146,9 +156,12 @@ public class IslandRing : MonoBehaviour {
 
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            temp = island.position;
-            temp.y += Random.Range(-40f, 40f);
-            island.position = temp;
+            if (island.GetComponent<Island>() != null)
+            {
+                temp = island.position;
+                temp.y += Random.Range(-40f, 40f);
+                island.position = temp;
+            }
         }
     }
 
@@ -158,11 +171,14 @@ public class IslandRing : MonoBehaviour {
 
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            temp = island.localScale;
-            temp.x += Random.Range(.1f, 10f);
-            temp.y += Random.Range(.1f, 10f);
-            temp.z += Random.Range(.1f, 10f);
-            island.localScale = temp;
+            if (island.GetComponent<Island>() != null)
+            {
+                temp = island.localScale;
+                temp.x += Random.Range(.1f, 10f);
+                temp.y += Random.Range(.1f, 10f);
+                temp.z += Random.Range(.1f, 10f);
+                island.localScale = temp;
+            }
         }
     }
 
@@ -173,12 +189,15 @@ public class IslandRing : MonoBehaviour {
 
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
-            random = Random.Range(-30f, 30f);
-            temp = island.position;
-            temp.x += random;
-            random = Random.Range(-30f, 30f);
-            temp.z += random;
-            island.position = temp;
+            if (island.GetComponent<Island>() != null)
+            {
+                random = Random.Range(-30f, 30f);
+                temp = island.position;
+                temp.x += random;
+                random = Random.Range(-30f, 30f);
+                temp.z += random;
+                island.position = temp;
+            }
         }
     }
 }
