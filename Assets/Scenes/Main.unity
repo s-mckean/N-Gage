@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  range: 100
+  range: 700
   clipSize: 10
   reloadTime: 1
   playerCam: {fileID: 1476572372}
@@ -3039,12 +3039,12 @@ Prefab:
     - target: {fileID: 224691397108983636, guid: e6243bc90e50fe24387d83efba130e68,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.000032522552
+      value: 766
       objectReference: {fileID: 0}
     - target: {fileID: 224691397108983636, guid: e6243bc90e50fe24387d83efba130e68,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 60.614
+      value: 499.5
       objectReference: {fileID: 0}
     - target: {fileID: 224691397108983636, guid: e6243bc90e50fe24387d83efba130e68,
         type: 2}
@@ -3129,7 +3129,7 @@ Prefab:
     - target: {fileID: 223749317767215044, guid: e6243bc90e50fe24387d83efba130e68,
         type: 2}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 223749317767215044, guid: e6243bc90e50fe24387d83efba130e68,
         type: 2}
