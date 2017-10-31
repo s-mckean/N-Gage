@@ -80,7 +80,7 @@ public class playerControl : MonoBehaviour
 	public GameObject plasmaFireBallFab;
 
 	GameObject fireball;
-	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 4.48f, 0.75f);
+	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 1.0f, 0.75f);
 	
 	
 
