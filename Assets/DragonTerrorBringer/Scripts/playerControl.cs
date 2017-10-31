@@ -80,7 +80,7 @@ public class playerControl : MonoBehaviour
 	public GameObject plasmaFireBallFab;
 
 	GameObject fireball;
-	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 1.0f, 0.75f);
+	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 98.8f, 30.64f);
 	
 	
 
@@ -126,7 +126,7 @@ public class playerControl : MonoBehaviour
 		idle02 = Animator.StringToHash("Idle02");
 		
 		// remove after testing
-		anim.SetTrigger(flyForward);	
+		anim.SetTrigger(flyFlameAttack);	
 		IdleAttackCollider.SetActive(false);
 		FlyForwardCollider.SetActive(true);
 		avoidObsIdleAttack.SetActive(false);
@@ -245,7 +245,7 @@ public class playerControl : MonoBehaviour
 
 
 						// boss is above the player
-						fireball = Instantiate(plasmaFireBallFab, transform.position + fireballOffsetVec, Quaternion.identity);
+						fireball = Instantiate(plasmaFireBallFab, transform.position + (transform.rotation * fireballOffsetVec), Quaternion.identity);	
 						PlayAttackAnimation();
 						isInFiringPosition = true;
 					}

@@ -11,7 +11,7 @@ public class PlasmaFireball : MonoBehaviour {
 	Vector3 velocity;
 	float scalar = 12.0f;
 
-	float timeToLive = 3.0f;
+	float timeToLive = 2.2f;
 	
 	public void Fire(Transform playerTransform) {
 		velocity = (playerTransform.position - transform.position).normalized * scalar;
@@ -31,7 +31,15 @@ public class PlasmaFireball : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		Instantiate(explosionFab, transform.position, Quaternion.identity);
-		Destroy(gameObject);
+		if(other.gameObject.tag == "LandArea") { 
+			Instantiate(explosionFab, transform.position, Quaternion.identity);
+			Destroy(gameObject);
+		}
+		else if(other.gameObject.tag == "Player") {
+			Instantiate(explosionFab, transform.position, Quaternion.identity);
+			Destroy(gameObject);
+		}
 	}
+
+
 }
