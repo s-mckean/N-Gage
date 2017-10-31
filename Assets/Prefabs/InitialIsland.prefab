@@ -3438,7 +3438,7 @@ MonoBehaviour:
   avoidObsFlyFoward: {fileID: 1972056505833964}
   bellyObj: {fileID: 1016367790619054}
   backObj: {fileID: 1279384924473832}
-  plasmaFireBall: {fileID: 1318503084118610, guid: f7172129931a2ce469aca6cc31ee3af4,
+  plasmaFireBallFab: {fileID: 1318503084118610, guid: f7172129931a2ce469aca6cc31ee3af4,
     type: 2}
 --- !u!114 &114831258925638256
 MonoBehaviour:

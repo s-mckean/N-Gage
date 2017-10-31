@@ -77,8 +77,9 @@ public class playerControl : MonoBehaviour
 
 
 	// plasma ball
-	public GameObject plasmaFireBall;
+	public GameObject plasmaFireBallFab;
 
+	GameObject fireball;
 	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 4.48f, 0.75f);
 	
 	
@@ -123,7 +124,7 @@ public class playerControl : MonoBehaviour
 		land = Animator.StringToHash("Land");
 		die = Animator.StringToHash("Die");
 		idle02 = Animator.StringToHash("Idle02");
-
+		
 		// remove after testing
 		anim.SetTrigger(flyForward);	
 		IdleAttackCollider.SetActive(false);
@@ -194,7 +195,8 @@ public class playerControl : MonoBehaviour
 				if(chargeUPAnimationTimer <= 0.0f) {
 					// fire projectile
 					//Debug.Log("BOSS FIRE PROJECTILE");
-					
+					fireball.GetComponent<PlasmaFireball>().Fire(playerTransform);
+
 
 					// change animation back into movement
 					PlayFlyAnimation();
@@ -230,15 +232,20 @@ public class playerControl : MonoBehaviour
 					}
 					else {
 
+						//******************
+						// maybe delete this chunk of code
+						//*******************
 						// do we need to flip the boss around so the belly face the player
 						float bellyDistance = (bellyObj.transform.position - playerTransform.position).magnitude;
 						float backDistrance = (backObj.transform.position - playerTransform.position).magnitude;
-
 						if(backDistrance < bellyDistance) {
 							transform.Rotate(xAxis, 180.0f * Mathf.Deg2Rad);
 						}
+						//**************************
+
 
 						// boss is above the player
+						fireball = Instantiate(plasmaFireBallFab, fireballOffsetVec, Quaternion.identity, transform);
 						PlayAttackAnimation();
 						isInFiringPosition = true;
 					}

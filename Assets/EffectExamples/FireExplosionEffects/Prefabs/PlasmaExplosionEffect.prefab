@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 198000010585806678}
   - component: {fileID: 199000012270651464}
   - component: {fileID: 135017273316830384}
+  - component: {fileID: 114225445650196680}
   m_Layer: 0
   m_Name: PlasmaExplosionEffect
   m_TagString: Explosion
@@ -122,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 1000011730688910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 52, y: 52, z: 52}
   m_Children: []
   m_Father: {fileID: 4000011693693590}
   m_RootOrder: 0
@@ -148,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 1000010059211136}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 52, y: 52, z: 52}
   m_Children: []
   m_Father: {fileID: 4000011693693590}
   m_RootOrder: 1
@@ -161,11 +162,22 @@ Transform:
   m_GameObject: {fileID: 1000012812333644}
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 52, y: 52, z: 52}
   m_Children: []
   m_Father: {fileID: 4000011693693590}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114225445650196680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011128802252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f01dcafae74e2d41988f6a66f9fd0ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135017273316830384
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -187,7 +199,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -237,7 +249,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -625260172
+  randomSeed: 1130852754
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3364,7 +3376,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9774,7 +9786,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9824,7 +9836,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1621173323
+  randomSeed: -673241568
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13041,7 +13053,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -15641,8 +15653,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.4117647, g: 0.8352941, b: 0.9764706, a: 1}
-        key1: {r: 0.21960784, g: 0.48235294, b: 1, a: 1}
+        key0: {r: 1, g: 0.9411765, b: 0.62352943, a: 1}
+        key1: {r: 1, g: 0.3882353, b: 0.05882353, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -15745,7 +15757,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.03137255, g: 0.6784314, b: 1, a: 1}
+        key0: {r: 1, g: 0.9411765, b: 0.62352943, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}

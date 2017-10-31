@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4482381675951370}
   m_Layer: 0
   m_Name: LandArea
-  m_TagString: Untagged
+  m_TagString: LandArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -546,6 +546,7 @@ MonoBehaviour:
   distanceDownward: 10
   moveUpward: 1
   wrongPlacement: 0
+  ringPosition: 1
 --- !u!135 &135419880325614042
 SphereCollider:
   m_ObjectHideFlags: 1
