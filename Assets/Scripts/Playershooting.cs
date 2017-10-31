@@ -10,6 +10,7 @@ public class Playershooting : MonoBehaviour {
 
     public Camera playerCam;
     public ParticleSystem muzzleFlash;
+    public Animator animator;
 
 
     public GameObject Canvas;
@@ -38,7 +39,10 @@ public class Playershooting : MonoBehaviour {
     IEnumerator Reload()
     {
         //Debug.Log("reloading");
+        animator.SetBool("Reloading", true);
         yield return new WaitForSeconds(reloadTime);
+
+        animator.SetBool("Reloading", false);
         currentClip = clipSize;
     }
 
