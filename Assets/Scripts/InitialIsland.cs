@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InitialIsland : MonoBehaviour {
 
+    /*
     private GameObject forceField;
     private Rigidbody ffRigidBody;
     public float maxVerticalSpeed = 5000f;
@@ -21,22 +22,25 @@ public class InitialIsland : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void TriggeredUpdate () {
-        if (moveUpwards == true)
+        if (forceField != null)
         {
-            if (forceField.transform.position.y < originalPos.y + maxHeight)
+            if (moveUpwards == true)
             {
-                ffRigidBody.AddForce(new Vector3(0, maxVerticalSpeed, 0));
+                if (forceField.transform.position.y < originalPos.y + maxHeight)
+                {
+                    ffRigidBody.AddForce(new Vector3(0, maxVerticalSpeed, 0));
+                }
+                else
+                {
+                    moveUpwards = false;
+                }
             }
             else
             {
-                moveUpwards = false;
-            }
-        }
-        else
-        {
-            if (forceField.transform.position.y > originalPos.y - minHeight)
-            {
-                moveUpwards = true;
+                if (forceField.transform.position.y > originalPos.y - minHeight)
+                {
+                    moveUpwards = true;
+                }
             }
         }
 	}
@@ -50,4 +54,5 @@ public class InitialIsland : MonoBehaviour {
     {
 
     }
+     * */
 }

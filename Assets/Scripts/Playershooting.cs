@@ -45,12 +45,12 @@ public class Playershooting : MonoBehaviour {
     {
 
         currentClip--;
-        Debug.Log("shooting");
+        //Debug.Log("shooting");
         RaycastHit hit;
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {
             EnemyControl enemy = hit.transform.GetComponent<EnemyControl>();
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);

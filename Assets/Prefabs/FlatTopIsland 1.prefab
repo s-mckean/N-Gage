@@ -21,7 +21,24 @@ GameObject:
   - component: {fileID: 4482381675951370}
   m_Layer: 0
   m_Name: LandArea
-  m_TagString: Untagged
+  m_TagString: LandArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1246094529217104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4922420753760546}
+  - component: {fileID: 135419880325614042}
+  - component: {fileID: 65802160125163698}
+  m_Layer: 0
+  m_Name: NoFlyZone
+  m_TagString: NoFlyZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,6 +342,19 @@ Transform:
   m_Father: {fileID: 4482381675951370}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -64.53001, z: 0}
+--- !u!4 &4922420753760546
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246094529217104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4927441132090176}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4927441132090176
 Transform:
   m_ObjectHideFlags: 1
@@ -338,6 +368,7 @@ Transform:
   - {fileID: 4733209231060852}
   - {fileID: 4227481624484566}
   - {fileID: 4482381675951370}
+  - {fileID: 4922420753760546}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -440,6 +471,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65802160125163698
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246094529217104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.49, y: 6.44, z: 11.81}
+  m_Center: {x: -0.18, y: 3.8, z: 0.24}
 --- !u!65 &65810020213600144
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -503,3 +546,16 @@ MonoBehaviour:
   distanceDownward: 10
   moveUpward: 1
   wrongPlacement: 0
+  ringPosition: 1
+--- !u!135 &135419880325614042
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246094529217104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.7
+  m_Center: {x: 0, y: -0.18, z: 0}

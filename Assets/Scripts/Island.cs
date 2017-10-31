@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Island : MonoBehaviour {
+public class Island : MonoBehaviour
+{
 
     public float distanceUpward = 10f;
     public float distanceDownward = 10f;
@@ -16,14 +17,26 @@ public class Island : MonoBehaviour {
     [HideInInspector]
     public bool wrongPlacement = false;
 
+    private GameObject gravityZone;
+    private GameObject genTower;
+
+    public int ringPosition = 1;
+
     public void triggeredStart()
     {
         originalPos = gameObject.transform.position;
+        gravityZone = this.gameObject.transform.Find("GravityZone").gameObject;
+        genTower = this.gameObject.transform.Find("GeneratorTowerObject").gameObject;
+        genTower.GetComponent<GeneratorTower>().TriggeredStart();
     }
 
-    public void triggeredUpdate()
+    public void triggeredUpdate( Vector3 forceFieldPos )
     {
         floatUpDown();
+        if (genTower != null)
+        {
+            genTower.GetComponent<GeneratorTower>().setEndPoint(forceFieldPos);
+        }
     }
 
     void floatUpDown()
@@ -54,5 +67,27 @@ public class Island : MonoBehaviour {
                 gameObject.transform.position = pos;
             }
         }
+    }
+
+    public bool isGravityZoneEnemyFree()
+    {
+        foreach (Transform child in gravityZone.GetComponentsInChildren<Transform>())
+        {
+            if (child.gameObject.tag == "Enemy")
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void DestroyGenTower()
+    {
+        Destroy(genTower);
+    }
+
+    public GameObject getGenTower()
+    {
+        return genTower;
     }
 }

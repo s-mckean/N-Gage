@@ -128,8 +128,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float boostCooldown;
         public KeyCode boostKey = KeyCode.E;
         Rigidbody Player;
-        public Text boostUI;
-
+        public Text boostGood;
+        public Text boostBad;
+        private Color tempColor;
 
         private void Start()
         {
@@ -153,8 +154,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Input.GetKey(boostKey))
                 if (!isBoostOnCooldown)
                     StartCoroutine(JumpBoost());
-            if (isBoostOnCooldown) boostUI.text = "Boost: on cooldown";
-            else boostUI.text = "Boost: good";
+            if (isBoostOnCooldown)
+            {
+                tempColor = boostGood.color;
+                tempColor.a = 0;
+                boostGood.color = tempColor;
+                tempColor = boostBad.color;
+                tempColor.a = 1;
+                boostBad.color = tempColor;
+            }
+            else
+            {
+                tempColor = boostBad.color;
+                tempColor.a = 0;
+                boostBad.color = tempColor;
+                tempColor = boostGood.color;
+                tempColor.a = 1;
+                boostGood.color = tempColor;
+            }
         }
 
 
@@ -211,7 +228,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.tag == "GravityZone")
             {
-                Debug.Log("Player Entered Island");
+                //Debug.Log("Player Entered Island");
                 this.gameObject.transform.SetParent(other.gameObject.transform, true);
             }
         }

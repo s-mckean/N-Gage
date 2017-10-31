@@ -77,7 +77,7 @@ public class EnemyControl : MonoBehaviour
     {
         if (other.gameObject.tag == "GravityZone")
         {
-            Debug.Log("Enemy Entered Island");
+            //Debug.Log("Enemy Entered Island");
             this.gameObject.transform.SetParent(other.gameObject.transform, true);
         }
     }
@@ -106,8 +106,8 @@ public class EnemyControl : MonoBehaviour
     void Die()
     {
         // play sound effect
-        AudioController.instance.PlayGrandDaddySFX();
-        Destroy(gameObject);
+        //AudioController.instance.PlayGrandDaddySFX();
+        Destroy(this.gameObject);
     }
 
     public void MoveRandomly()

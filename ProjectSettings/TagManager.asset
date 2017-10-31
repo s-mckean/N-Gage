@@ -11,6 +11,12 @@ TagManager:
   - InitialIsland
   - IslandController
   - Generator
+  - Boss
+  - NoFlyZone
+  - DoNotDetect
+  - BossBody
+  - Explosion
+  - LandArea
   layers:
   - Default
   - TransparentFX
