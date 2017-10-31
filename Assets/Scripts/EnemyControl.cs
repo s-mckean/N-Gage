@@ -53,7 +53,6 @@ public class EnemyControl : MonoBehaviour
         forwardTransform.y = 0.0f;
         transform.forward = forwardTransform;
 
-        Debug.Log(transform.forward);
         if (Vector3.Distance(transform.position, hero.position) <= 2.5)
         {
             transform.LookAt(hero);
@@ -148,5 +147,10 @@ public class EnemyControl : MonoBehaviour
     {
         GetComponent<Animation>().wrapMode = WrapMode.Loop;
         GetComponent<Animation>().CrossFade(animationName);
+    }
+
+    public void SetHero(Transform player)
+    {
+        hero = player;
     }
 }
