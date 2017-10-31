@@ -19,4 +19,10 @@ public class ParticleSystemScript : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnTriggerEnter(Collider other) {
+		if(other.gameObject.tag == "Player") {
+			
+		}
+	}
 }
