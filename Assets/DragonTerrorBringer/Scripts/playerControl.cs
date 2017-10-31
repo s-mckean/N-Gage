@@ -75,6 +75,14 @@ public class playerControl : MonoBehaviour
 	bool isInFiringPosition = false;
 	bool isNOTup	= true;
 
+
+	// plasma ball
+	public GameObject plasmaFireBall;
+
+	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 4.48f, 0.75f);
+	
+	
+
 	#region Animator
 	Animator anim;
 	int scream;
