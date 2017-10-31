@@ -11,13 +11,10 @@ using UnityEngine.AI;
 
 public class EnemyControl : MonoBehaviour
 {
-
     public float hitPoints = 50f;
     public Transform hero;
 
-    Rigidbody rb;
-
-    float angleRotation = 10 * Mathf.Deg2Rad;
+    float angleRotation = 0;
 
     float deltaRotateDirTimer = 0.0f;
     float deltaRotateDirTimerLimit;
@@ -29,7 +26,7 @@ public class EnemyControl : MonoBehaviour
     const float MAX_MOVE_INBOUND_TIME = 3.0f;
 
     float speed;
-    const float MAX_SPEED = 0.01f;
+    const float MAX_SPEED = 4.0f;
 
     float probabiliyOfStandingStill = 0.3f;
 
@@ -40,58 +37,37 @@ public class EnemyControl : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        SetAnimation("walk");
         moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
-        speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);
+        speed = (Random.Range(0.0f, 10.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);
         angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
 
-        transform.Rotate(transform.up, Random.Range(-360, 360) * Mathf.PI, Space.World);
+        transform.forward = Quaternion.AngleAxis(Random.Range(0f, 360f), transform.up) * transform.forward;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (FollowPlayer())
+        Vector3 forwardTransform = transform.forward;
+        forwardTransform.y = 0.0f;
+        transform.forward = forwardTransform;
+
+        Debug.Log(transform.forward);
+        if (Vector3.Distance(transform.position, hero.position) <= 2.5)
         {
-            //Debug.Log("Following");
+            transform.LookAt(hero);
+            SetAnimation("hit");
+        }
+        else if (Vector3.Distance(transform.position, hero.position) <= 5)
+        {
+            SetAnimation("walk");
+            transform.LookAt(hero);
+            transform.position += transform.forward * speed * Time.deltaTime;
         }
         else
         {
-            // move forward
-            Vector3 newPos = new Vector3(0.0f, 0.0f, speed);
-            newPos = transform.rotation * newPos;
-            transform.position = new Vector3(transform.position.x + newPos.x, transform.position.y + newPos.y, transform.position.z + newPos.z);
-
-            // change the movement
-            if ((moveTimer += Time.deltaTime) >= moveTimeLimit)
-            {
-                // get a new speed
-                speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);
-
-                // reset timer
-                moveTimer = 0.0f;
-                moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
-            }
-
-            // if enemy is moving in bound, don't rotate the enemy.
-            if (timerMoveInbound < 0.0f)
-            {
-                timerMoveInbound -= Time.deltaTime;
-            }
-            else
-            {
-                transform.Rotate(transform.up, angleRotation);
-            }
-
-            // change rotation direction
-            if ((deltaRotateDirTimer += Time.deltaTime) >= deltaRotateDirTimerLimit)
-            {
-                angleRotation *= (Random.Range(0, 2) == 0 ? 1.0f : -1.0f);
-
-                deltaRotateDirTimer = 0.0f;
-                deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
-            }
+            MoveRandomly();
         }
 
     }
@@ -112,7 +88,7 @@ public class EnemyControl : MonoBehaviour
         // enemy exiting the area, turn enemy around
         if (other.gameObject.tag == "CreatureArea")
         {
-            transform.Rotate(transform.up, 180.0f * Mathf.PI, Space.World);
+            transform.forward = Quaternion.AngleAxis(180.0f, transform.up) * transform.forward;
             timerMoveInbound = MAX_MOVE_INBOUND_TIME;
         }
     }
@@ -134,20 +110,43 @@ public class EnemyControl : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public bool FollowPlayer()
+    public void MoveRandomly()
     {
-        Vector3 toPlayerVector = transform.position - hero.position;
-        //Debug.Log(toPlayerVector);
-        if (Mathf.Abs(toPlayerVector.x) < 20 && Mathf.Abs(toPlayerVector.z) < 20)
+        // move forward
+        transform.position += transform.forward * speed * Time.deltaTime;
+
+        // change the movement
+        if ((moveTimer += Time.deltaTime) >= moveTimeLimit)
         {
-            //Debug.Log("Player is in Range");
-            Vector3 lookAtTransform = new Vector3(hero.position.x, hero.position.y + 0.8f, hero.position.z);
-            //Debug.Log(lookAtTransform);
-            transform.LookAt(lookAtTransform);
-            transform.position = transform.position + (transform.rotation * new Vector3(0f, 0f, speed));
-            return true;
+            // get a new speed
+            speed = (Random.Range(0.0f, 1.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);
+            if (speed == 0) SetAnimation("idle");
+            else SetAnimation("walk");
+
+            // reset timer
+            moveTimer = 0.0f;
+            moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
         }
-        else return false;
+
+        // if enemy is moving in bound, don't rotate the enemy.
+        if (timerMoveInbound > 0.0f)
+        {
+            timerMoveInbound -= Time.deltaTime;
+        }
+
+        // change rotation direction
+        else if ((deltaRotateDirTimer += Time.deltaTime) >= deltaRotateDirTimerLimit)
+        {
+            angleRotation = Random.Range(0.0f, 180.0f);
+            transform.forward = Quaternion.AngleAxis(angleRotation, transform.up) * transform.forward;
+            deltaRotateDirTimer = 0.0f;
+            deltaRotateDirTimerLimit = Random.Range(LOWER_DELTA_ROTATE, UPPER_DELTA_ROTATE);
+        }
     }
 
+    public void SetAnimation(string animationName)
+    {
+        GetComponent<Animation>().wrapMode = WrapMode.Loop;
+        GetComponent<Animation>().CrossFade(animationName);
+    }
 }
