@@ -9,6 +9,7 @@ public class Playershooting : MonoBehaviour {
 
 
     public Camera playerCam;
+    public ParticleSystem muzzleFlash;
 
 
     public GameObject Canvas;
@@ -44,6 +45,7 @@ public class Playershooting : MonoBehaviour {
     void shotsFired()
     {
 
+        muzzleFlash.Play();
         currentClip--;
         //Debug.Log("shooting");
         RaycastHit hit;
