@@ -9,7 +9,7 @@ public class PlasmaFireball : MonoBehaviour {
 	bool isActive = false;
 	
 	Vector3 velocity;
-	float scalar = 2.0f;
+	float scalar = 12.0f;
 	
 	public void Fire(Transform playerTransform) {
 		velocity = (playerTransform.position - transform.position).normalized * scalar;

@@ -195,6 +195,7 @@ public class playerControl : MonoBehaviour
 				if(chargeUPAnimationTimer <= 0.0f) {
 					// fire projectile
 					//Debug.Log("BOSS FIRE PROJECTILE");
+					fireball = Instantiate(plasmaFireBallFab, transform.position + fireballOffsetVec, Quaternion.identity);
 					fireball.GetComponent<PlasmaFireball>().Fire(playerTransform);
 
 
@@ -245,7 +246,6 @@ public class playerControl : MonoBehaviour
 
 
 						// boss is above the player
-						fireball = Instantiate(plasmaFireBallFab, fireballOffsetVec, Quaternion.identity, transform);
 						PlayAttackAnimation();
 						isInFiringPosition = true;
 					}
