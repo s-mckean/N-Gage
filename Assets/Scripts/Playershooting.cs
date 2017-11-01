@@ -54,16 +54,27 @@ public class Playershooting : MonoBehaviour {
         //Debug.Log("shooting");
         RaycastHit hit;
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
-        {
-            EnemyControl enemy = hit.transform.GetComponent<EnemyControl>();
-            //Debug.Log(hit.transform.name);
-            if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-            }
+        {			
+			if(hit.transform.gameObject.tag == "Enemy") {
+				EnemyControl enemy = hit.transform.GetComponent<EnemyControl>();
+				//Debug.Log(hit.transform.name);
+				if (enemy != null)
+				{
+					enemy.TakeDamage(damage);
+				}
 
-            GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(shots, 1f);
+				GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
+				Destroy(shots, 1f);
+			}
+			else if(hit.transform.gameObject.tag == "BossBody") {
+				GameObject.FindGameObjectWithTag("Boss").GetComponent<playerControl>().Hit();
+				GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
+				Destroy(shots, 1f);
+			}
+			else if(hit.transform.gameObject.tag == "Generator") {
+				GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
+				Destroy(shots, 1f);
+			}
         }
     }
 }
