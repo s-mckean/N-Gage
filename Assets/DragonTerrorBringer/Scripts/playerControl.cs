@@ -4,6 +4,9 @@ using System.Collections;
 public class playerControl : MonoBehaviour 
 {
 
+	public int health = 200;
+	bool isDead = false;
+
 	public Transform playerTransform;
 
 	// for player to shoot at the boss
@@ -163,6 +166,7 @@ public class playerControl : MonoBehaviour
 	void Update() {
 		//Debug.Log(transform.up);
 		//return;
+		if(isDead) return;
 
 		if(isInForceField) {
 			if(GameObject.FindGameObjectsWithTag("Generator").Length <= 0) {
@@ -450,5 +454,25 @@ public class playerControl : MonoBehaviour
 	{
 		anim.SetTrigger(idle02);
 	}
+
+
+	/// <summary>
+	/// Hit has an optional paramater. If no arugment is supplied to Hit function,
+	/// damage default to a value of 1
+	/// </summary>
+	/// <param name="damage"></param>
+	public void Hit(int damage = 1) {
+		if(isDead) return;
+
+		health -= damage;
+		if(health <= 0) {
+			isDead = true;
+			Die();
+			Destroy(gameObject, 1.6f);
+		}
+	}
+
+
+
 	
 }
