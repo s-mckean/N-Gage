@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37233304e7e7ab4696241f450e344fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4425165203520950, guid: fc229346def80a6478d91b2223de43ee, type: 2}
   enemyPrefab: {fileID: 1337458578297946, guid: 1c4b163e48829cb45892f9e4521520fa,
     type: 2}
   enemyNumber: 3

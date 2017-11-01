@@ -17,6 +17,7 @@ public class IslandController : MonoBehaviour
     public int ringAmount = 3;
     private bool allGenTowersDestroyed = false;
 
+    public GameObject player;
 
     private List<GameObject> rings = new List<GameObject>();
 
@@ -42,7 +43,7 @@ public class IslandController : MonoBehaviour
         {
             if (ring.gameObject.GetComponent<IslandRing>() != null)
             {
-                ring.gameObject.GetComponent<IslandRing>().TriggeredStart();
+                ring.gameObject.GetComponent<IslandRing>().TriggeredStart(player.transform);
             }
         }
     }

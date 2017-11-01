@@ -35,7 +35,7 @@ public class EnemyControl : MonoBehaviour
     const float LOWER_MOVE_TIME = 0.2f;
     const float UPPER_MOVE_TIME = 1.0f;
 
-    void Start()
+    public void TriggeredStart()
     {
         SetAnimation("walk");
         moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
@@ -47,7 +47,7 @@ public class EnemyControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void TriggeredUpdate()
     {
         Vector3 forwardTransform = transform.forward;
         forwardTransform.y = 0.0f;
@@ -71,12 +71,18 @@ public class EnemyControl : MonoBehaviour
 
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "GravityZone")
+        {
+            this.gameObject.transform.SetParent(other.gameObject.transform, true);
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "GravityZone")
         {
-            //Debug.Log("Enemy Entered Island");
             this.gameObject.transform.SetParent(other.gameObject.transform, true);
         }
     }

@@ -23,13 +23,13 @@ public class IslandRing : MonoBehaviour
     private List<GameObject> genTowers = new List<GameObject>();
 
     // Use this for initialization
-    public void TriggeredStart()
+    public void TriggeredStart( Transform player )
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
             if (island.GetComponent<Island>() != null)
             {
-                island.gameObject.GetComponent<Island>().triggeredStart();
+                island.gameObject.GetComponent<Island>().triggeredStart(player);
                 if (island.transform.Find("GeneratorTowerObject") != null)
                 {
                     genTowers.Add(island.transform.Find("GeneratorTowerObject").gameObject);
