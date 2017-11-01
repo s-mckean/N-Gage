@@ -36,6 +36,9 @@ public class PlasmaFireball : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		else if(other.gameObject.tag == "Player") {
+			GameObject pt = GameObject.FindGameObjectWithTag("Player");
+			Vector3 direction = (pt.transform.position - gameObject.transform.position).normalized;
+			pt.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
 			Instantiate(explosionFab, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
