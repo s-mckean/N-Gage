@@ -35,6 +35,8 @@ public class EnemyControl : MonoBehaviour
     const float LOWER_MOVE_TIME = 0.2f;
     const float UPPER_MOVE_TIME = 1.0f;
 
+    public bool enemyIsDead = false;
+
     public void TriggeredStart()
     {
         SetAnimation("walk");
@@ -49,26 +51,28 @@ public class EnemyControl : MonoBehaviour
     // Update is called once per frame
     public void TriggeredUpdate()
     {
-        Vector3 forwardTransform = transform.forward;
-        forwardTransform.y = 0.0f;
-        transform.forward = forwardTransform;
+        if (enemyIsDead == false)
+        {
+            Vector3 forwardTransform = transform.forward;
+            forwardTransform.y = 0.0f;
+            transform.forward = forwardTransform;
 
-        if (Vector3.Distance(transform.position, hero.position) <= 2.5)
-        {
-            transform.LookAt(hero);
-            SetAnimation("hit");
+            if (Vector3.Distance(transform.position, hero.position) <= 2.5)
+            {
+                transform.LookAt(hero);
+                SetAnimation("hit");
+            }
+            else if (Vector3.Distance(transform.position, hero.position) <= 5)
+            {
+                SetAnimation("walk");
+                transform.LookAt(hero);
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
+            else
+            {
+                MoveRandomly();
+            }
         }
-        else if (Vector3.Distance(transform.position, hero.position) <= 5)
-        {
-            SetAnimation("walk");
-            transform.LookAt(hero);
-            transform.position += transform.forward * speed * Time.deltaTime;
-        }
-        else
-        {
-            MoveRandomly();
-        }
-
     }
 
     void OnTriggerStay(Collider other)
@@ -104,11 +108,11 @@ public class EnemyControl : MonoBehaviour
         hitPoints -= amount;
         if (hitPoints <= 0f)
         {
-            Die();
+            enemyIsDead = true;
         }
     }
 
-    void Die()
+    public void Die()
     {
         // play sound effect
         //AudioController.instance.PlayGrandDaddySFX();

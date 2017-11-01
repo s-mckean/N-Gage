@@ -7,7 +7,7 @@ public class SpawnerScript : MonoBehaviour {
     public Transform player;
     public GameObject enemyPrefab;
     public int enemyNumber = 3;
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<EnemyControl> enemies = new List<EnemyControl>();
 
 	// Use this for initialization
 	public void TriggeredStart () {
@@ -15,20 +15,25 @@ public class SpawnerScript : MonoBehaviour {
         {
             Vector3 placement = new Vector3(Random.Range(0.0f, 10.0f), 0.0f, Random.Range(0.0f, 10.0f));
             GameObject enemy = Instantiate(enemyPrefab, transform.position + placement, Quaternion.identity);
-            enemies.Add(enemy);
-        }
-
-        foreach( GameObject enemy in enemies )
-        {
             enemy.GetComponent<EnemyControl>().TriggeredStart();
+            enemies.Add(enemy.GetComponent<EnemyControl>());
         }
 	}
 
     public void TriggeredUpdate()
     {
-        foreach (GameObject enemy in enemies)
+        foreach (EnemyControl enemy in enemies)
         {
-            enemy.GetComponent<EnemyControl>().TriggeredUpdate();
+            if (enemy.enemyIsDead)
+            {
+                EnemyControl temp = enemy;
+                enemies.Remove(enemy);
+                temp.Die();
+            }
+            else
+            {
+                enemy.TriggeredUpdate();
+            }
         }
     }
 
@@ -36,15 +41,15 @@ public class SpawnerScript : MonoBehaviour {
     {
         player = p;
 
-        foreach (GameObject enemy in enemies)
+        foreach (EnemyControl enemy in enemies)
         {
-            enemy.GetComponent<EnemyControl>().SetHero(player);
+            enemy.SetHero(player);
         }
     }
 
     public void DestroyEnemy(GameObject enemy)
     {
-        enemies.Remove(enemy);
+        enemies.Remove(enemy.GetComponent<EnemyControl>());
     }
 
     public bool AreEnemiesLeft()

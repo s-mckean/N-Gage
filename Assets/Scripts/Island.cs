@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Island : MonoBehaviour
 {
-
     public float distanceUpward = 10f;
     public float distanceDownward = 10f;
     public static float IslandMovementSpeed = 2;
@@ -18,8 +17,8 @@ public class Island : MonoBehaviour
     public bool wrongPlacement = false;
 
     private GameObject gravityZone;
-    private GameObject genTower;
-    private GameObject spawner;
+    private GeneratorTower genTower;
+    private SpawnerScript spawner;
 
     public int ringPosition = 1;
 
@@ -28,12 +27,12 @@ public class Island : MonoBehaviour
         originalPos = gameObject.transform.position;
         gravityZone = this.gameObject.transform.Find("GravityZone").gameObject;
 
-        genTower = this.gameObject.transform.Find("GeneratorTowerObject").gameObject;
-        genTower.GetComponent<GeneratorTower>().TriggeredStart();
+        genTower = this.gameObject.transform.Find("GeneratorTowerObject").GetComponent<GeneratorTower>();
+        genTower.TriggeredStart();
 
-        spawner = this.gameObject.transform.Find("Spawner").gameObject;
-        spawner.GetComponent<SpawnerScript>().TriggeredStart();
-        spawner.GetComponent<SpawnerScript>().setPlayer(player);
+        spawner = this.gameObject.transform.Find("Spawner").GetComponent<SpawnerScript>();
+        spawner.TriggeredStart();
+        spawner.setPlayer(player);
     }
 
     public void triggeredUpdate( Vector3 forceFieldPos )
@@ -41,10 +40,10 @@ public class Island : MonoBehaviour
         floatUpDown();
         if (genTower != null)
         {
-            genTower.GetComponent<GeneratorTower>().setEndPoint(forceFieldPos);
+            genTower.setEndPoint(forceFieldPos);
         }
 
-        spawner.GetComponent<SpawnerScript>().TriggeredUpdate();
+        spawner.TriggeredUpdate();
     }
 
     void floatUpDown()
@@ -81,7 +80,7 @@ public class Island : MonoBehaviour
     {
         foreach (Transform child in gravityZone.GetComponentsInChildren<Transform>())
         {
-            if (spawner.GetComponent<SpawnerScript>().AreEnemiesLeft())
+            if (spawner.AreEnemiesLeft())
             {
                 return false;
             }
@@ -89,13 +88,12 @@ public class Island : MonoBehaviour
         return true;
     }
 
-    public void DestroyGenTower()
+    public GeneratorTower getGenTower()
     {
-        Destroy(genTower);
-    }
-
-    public GameObject getGenTower()
-    {
+        if (genTower == null)
+        {
+            return null;
+        }
         return genTower;
     }
 }

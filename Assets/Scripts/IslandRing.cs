@@ -20,7 +20,8 @@ public class IslandRing : MonoBehaviour
     [HideInInspector]
     public List<Vector3> positions = new List<Vector3>();
     [HideInInspector]
-    private List<GameObject> genTowers = new List<GameObject>();
+    private List<GeneratorTower> genTowers = new List<GeneratorTower>();
+    private List<Island> islands = new List<Island>();
 
     // Use this for initialization
     public void TriggeredStart( Transform player )
@@ -29,17 +30,18 @@ public class IslandRing : MonoBehaviour
         {
             if (island.GetComponent<Island>() != null)
             {
-                island.gameObject.GetComponent<Island>().triggeredStart(player);
+                island.GetComponent<Island>().triggeredStart(player);
                 if (island.transform.Find("GeneratorTowerObject") != null)
                 {
-                    genTowers.Add(island.transform.Find("GeneratorTowerObject").gameObject);
+                    genTowers.Add(island.transform.Find("GeneratorTowerObject").GetComponent<GeneratorTower>());
                 }
+                islands.Add(island.GetComponent<Island>());
             }
         }
 
-        foreach (GameObject tower in genTowers)
+        foreach (GeneratorTower tower in genTowers)
         {
-            tower.GetComponent<GeneratorTower>().TriggeredStart();
+            tower.TriggeredStart();
         }
         genTowerAmount = genTowers.Count;
     }
@@ -47,19 +49,20 @@ public class IslandRing : MonoBehaviour
     // Update is called once per frame
     public void TriggeredUpdate(Vector3 forceFieldPos)
     {
-        foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
+        foreach (Island island in islands)
         {
-            if (island.GetComponent<Island>() != null)
-            {
-                island.gameObject.GetComponent<Island>().triggeredUpdate( forceFieldPos );
+                island.triggeredUpdate( forceFieldPos );
 
-                if (island.gameObject.GetComponent<Island>().isGravityZoneEnemyFree())
+                if (island.getGenTower() != null)
                 {
-                    island.gameObject.GetComponent<Island>().DestroyGenTower();
-                    genTowers.Remove(island.gameObject.GetComponent<Island>().getGenTower());
-                    genTowerAmount = genTowers.Count;
+                    if (island.isGravityZoneEnemyFree())
+                    {
+                        GameObject temp = island.getGenTower().gameObject;
+                        genTowers.Remove(island.getGenTower());
+                        Destroy(temp);
+                        genTowerAmount = genTowers.Count;
+                    }
                 }
-            }
         }
 
         if (rotateClockwise)

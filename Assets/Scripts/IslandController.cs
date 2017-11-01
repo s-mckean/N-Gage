@@ -19,7 +19,7 @@ public class IslandController : MonoBehaviour
 
     public GameObject player;
 
-    private List<GameObject> rings = new List<GameObject>();
+    private List<IslandRing> rings = new List<IslandRing>();
 
     private int genTowerAmount = 0;
     public Text towerAmount;
@@ -41,9 +41,10 @@ public class IslandController : MonoBehaviour
 
         foreach (Transform ring in ringMaster.GetComponentsInChildren<Transform>())
         {
-            if (ring.gameObject.GetComponent<IslandRing>() != null)
+            if (ring.GetComponent<IslandRing>() != null)
             {
-                ring.gameObject.GetComponent<IslandRing>().TriggeredStart(player.transform);
+                ring.GetComponent<IslandRing>().TriggeredStart(player.transform);
+                rings.Add(ring.GetComponent<IslandRing>());
             }
         }
     }
@@ -54,20 +55,17 @@ public class IslandController : MonoBehaviour
 
         allGenTowersDestroyed = true;
         genTowerAmount = 0;
-        foreach (Transform ring in ringMaster.GetComponentsInChildren<Transform>())
+        foreach (IslandRing ring in rings)
         {
-            if (ring.gameObject.GetComponent<IslandRing>() != null)
-            {
                 if (forceField != null)
                 {
-                    ring.gameObject.GetComponent<IslandRing>().TriggeredUpdate(forceField.transform.position);
+                    ring.TriggeredUpdate(forceField.transform.position);
                 }
-                if (ring.gameObject.GetComponent<IslandRing>().genTowerAmount > 0)
+                if (ring.genTowerAmount > 0)
                 {
                     allGenTowersDestroyed = false;
                 }
-                genTowerAmount += ring.gameObject.GetComponent<IslandRing>().genTowerAmount;
-            }
+                genTowerAmount += ring.genTowerAmount;
         }
         towerAmount.text = genTowerAmount.ToString();
 
@@ -94,7 +92,6 @@ public class IslandController : MonoBehaviour
             _islandRingPrefab.GetComponent<IslandRing>().RadiusX = i * initialIsland.GetComponent<MeshRenderer>().bounds.size.x * 2;
             _islandRingPrefab.GetComponent<IslandRing>().RadiusZ = i * initialIsland.GetComponent<MeshRenderer>().bounds.size.x * 2;
             _islandRingPrefab.transform.SetParent(ringMaster.transform, true);
-            rings.Add(_islandRingPrefab);
         }
     }
 
