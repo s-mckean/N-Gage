@@ -228,8 +228,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.tag == "GravityZone")
             {
-                //Debug.Log("Player Entered Island");
-                this.gameObject.transform.SetParent(other.gameObject.transform, true);
+                this.transform.SetParent(other.gameObject.transform, true);
+
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag == "GravityZone")
+            {
+                this.transform.SetParent(null, true);
             }
         }
 
