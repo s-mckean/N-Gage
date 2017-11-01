@@ -325,7 +325,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672206325908958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1334.8961, y: 327.4207, z: -1281.59}
+  m_LocalPosition: {x: 196.2151, y: 811.4752, z: -1554.7821}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4488931543295648}
@@ -812,7 +812,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.7379308, g: 0, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 0.5
   m_Range: 100
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -875,7 +875,6 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1337458578297946, guid: 1c4b163e48829cb45892f9e4521520fa,
     type: 2}
   enemyNumber: 3
-  stillSpawning: 1
 --- !u!114 &114973436064998080
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,7 +24,7 @@ public class IslandRing : MonoBehaviour
     private List<Island> islands = new List<Island>();
 
     // Use this for initialization
-    public void TriggeredStart( Transform player )
+    public void TriggeredStart(Transform player)
     {
         foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
         {
@@ -51,18 +51,18 @@ public class IslandRing : MonoBehaviour
     {
         foreach (Island island in islands)
         {
-                island.triggeredUpdate( forceFieldPos );
+            island.triggeredUpdate(forceFieldPos);
 
-                if (island.getGenTower() != null)
+            if (island.getGenTower() != null)
+            {
+                if (island.isGravityZoneEnemyFree())
                 {
-                    if (island.isGravityZoneEnemyFree())
-                    {
-                        GameObject temp = island.getGenTower().gameObject;
-                        genTowers.Remove(island.getGenTower());
-                        Destroy(temp);
-                        genTowerAmount = genTowers.Count;
-                    }
+                    GameObject temp = island.getGenTower().gameObject;
+                    genTowers.Remove(island.getGenTower());
+                    Destroy(temp);
+                    genTowerAmount = genTowers.Count;
                 }
+            }
         }
 
         if (rotateClockwise)
@@ -131,11 +131,22 @@ public class IslandRing : MonoBehaviour
 
     public void EraseIslands()
     {
-        foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
+        findIslands();
+
+        foreach (Island island in islands)
         {
-            if (island.GetComponent<Island>() != null)
+            DestroyImmediate(island.gameObject);
+        }
+    }
+
+    public void findIslands()
+    {
+        islands = new List<Island>();
+        foreach (Transform thing in this.gameObject.GetComponentsInChildren<Transform>())
+        {
+            if (thing.GetComponent<Island>() != null)
             {
-                DestroyImmediate(island.gameObject);
+                islands.Add(thing.GetComponent<Island>());
             }
         }
     }
@@ -156,32 +167,30 @@ public class IslandRing : MonoBehaviour
     public void RandomizeHeights()
     {
         Vector3 temp = new Vector3(0, 0, 0);
+        findIslands();
 
-        foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
+        foreach (Island island in islands)
         {
-            if (island.GetComponent<Island>() != null)
-            {
-                temp = island.position;
-                temp.y += Random.Range(-40f, 40f);
-                island.position = temp;
-            }
+            temp = island.transform.position;
+            temp.y += Random.Range(-40f, 40f);
+            island.transform.position = temp;
+
         }
     }
 
     public void RandomizeScales()
     {
         Vector3 temp = new Vector3(0, 0, 0);
+        findIslands();
 
-        foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
+        foreach (Island island in islands)
         {
-            if (island.GetComponent<Island>() != null)
-            {
-                temp = island.localScale;
+                temp = island.transform.localScale;
                 temp.x += Random.Range(.1f, 10f);
                 temp.y += Random.Range(.1f, 10f);
                 temp.z += Random.Range(.1f, 10f);
-                island.localScale = temp;
-            }
+                island.transform.localScale = temp;
+
         }
     }
 
@@ -190,17 +199,16 @@ public class IslandRing : MonoBehaviour
         float random;
         Vector3 temp = new Vector3();
 
-        foreach (Transform island in this.gameObject.GetComponentsInChildren<Transform>())
+        findIslands();
+
+        foreach (Island island in islands)
         {
-            if (island.GetComponent<Island>() != null)
-            {
                 random = Random.Range(-30f, 30f);
-                temp = island.position;
+                temp = island.transform.position;
                 temp.x += random;
                 random = Random.Range(-30f, 30f);
                 temp.z += random;
-                island.position = temp;
-            }
+                island.transform.position = temp;
         }
     }
 }

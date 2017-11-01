@@ -97,11 +97,21 @@ public class IslandController : MonoBehaviour
 
     public void EraseRings()
     {
-        foreach (Transform ring in ringMaster.GetComponentsInChildren<Transform>())
+        findRings();
+        foreach (IslandRing ring in rings)
         {
-            if (ring.GetComponent<IslandRing>() != null)
+            DestroyImmediate(ring.gameObject);
+        }
+    }
+
+    public void findRings()
+    {
+        rings = new List<IslandRing>();
+        foreach (Transform thing in ringMaster.GetComponentsInChildren<Transform>())
+        {
+            if (thing.GetComponent<IslandRing>() != null)
             {
-                DestroyImmediate(ring.gameObject);
+                rings.Add(thing.GetComponent<IslandRing>());
             }
         }
     }
