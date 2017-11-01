@@ -219,7 +219,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 22.7
+  m_Radius: 32.86
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198016292367221730
 ParticleSystem:
@@ -280,7 +280,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1766654217
+  randomSeed: -2071837386
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3542,7 +3542,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 728378456
+  randomSeed: 826816322
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6804,7 +6804,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2018775722
+  randomSeed: 218592424
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10066,7 +10066,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -35478064
+  randomSeed: -1303351368
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13328,7 +13328,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -322959211
+  randomSeed: 406025494
   InitialModule:
     serializedVersion: 3
     enabled: 1
