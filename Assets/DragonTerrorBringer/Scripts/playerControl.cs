@@ -210,16 +210,16 @@ public class playerControl : MonoBehaviour
 			else {				
 				// check if boss is right side up
 				if(isNOTup) { 
+					transform.LookAt(playerTransform);
+					//if(transform.up.x < 0.0f || transform.up.y < 0.0f || transform.up.z < 0.0f) { // flip right side up
+					//	transform.Rotate(zAxis, 160.0f * Mathf.Deg2Rad);
+					//}
 
-					if(transform.up.x < 0.0f || transform.up.y < 0.0f || transform.up.z < 0.0f) { // flip right side up
-						transform.Rotate(zAxis, 160.0f * Mathf.Deg2Rad);
-					}
-
-					// check if right vector is pointing down, if yes rotate a bit more
-					if(transform.right.x < 0.0f || transform.right.y < 0.0f || transform.right.z < 0.0f) {
-						transform.Rotate(zAxis, 40.0f * Mathf.Deg2Rad);
-						//Debug.Log("Right: " + transform.right);
-					}
+					//// check if right vector is pointing down, if yes rotate a bit more
+					//if(transform.right.x < 0.0f || transform.right.y < 0.0f || transform.right.z < 0.0f) {
+					//	transform.Rotate(zAxis, 40.0f * Mathf.Deg2Rad);
+					//	//Debug.Log("Right: " + transform.right);
+					//}
 
 					isNOTup = false;
 				}
@@ -236,12 +236,13 @@ public class playerControl : MonoBehaviour
 						// maybe delete this chunk of code
 						//*******************
 						// do we need to flip the boss around so the belly face the player
-						float bellyDistance = (bellyObj.transform.position - playerTransform.position).magnitude;
-						float backDistrance = (backObj.transform.position - playerTransform.position).magnitude;
-						if(backDistrance < bellyDistance) {
-							transform.Rotate(xAxis, 180.0f * Mathf.Deg2Rad);
-						}
+						//float bellyDistance = (bellyObj.transform.position - playerTransform.position).magnitude;
+						//float backDistrance = (backObj.transform.position - playerTransform.position).magnitude;
+						//if(backDistrance < bellyDistance) {
+						//	transform.Rotate(xAxis, 180.0f * Mathf.Deg2Rad);
+						//}
 						//**************************
+						
 
 
 						// boss is above the player

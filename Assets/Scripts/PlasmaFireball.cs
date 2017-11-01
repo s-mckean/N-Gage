@@ -9,7 +9,7 @@ public class PlasmaFireball : MonoBehaviour {
 	bool isActive = false;
 	
 	Vector3 velocity;
-	float scalar = 12.0f;
+	float scalar = 14.0f;
 
 	float timeToLive = 2.2f;
 	
