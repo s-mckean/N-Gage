@@ -8,6 +8,7 @@ public class SpawnerScript : MonoBehaviour {
     public GameObject enemyPrefab;
     public int enemyNumber = 3;
     private List<EnemyControl> enemies = new List<EnemyControl>();
+    EnemyControl enemyToBeRemoved;
 
 	// Use this for initialization
 	public void TriggeredStart () {
@@ -26,14 +27,18 @@ public class SpawnerScript : MonoBehaviour {
         {
             if (enemy.enemyIsDead)
             {
-                EnemyControl temp = enemy;
-                enemies.Remove(enemy);
-                temp.Die();
+                enemyToBeRemoved = enemy;
             }
             else
             {
                 enemy.TriggeredUpdate();
             }
+        }
+
+        if (enemyToBeRemoved != null)
+        {
+            enemies.Remove(enemyToBeRemoved);
+            enemyToBeRemoved.Die();
         }
     }
 
