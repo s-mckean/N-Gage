@@ -27,8 +27,11 @@ public class Island : MonoBehaviour
         originalPos = gameObject.transform.position;
         gravityZone = this.gameObject.transform.Find("GravityZone").gameObject;
 
-        genTower = this.gameObject.transform.Find("GeneratorTowerObject").GetComponent<GeneratorTower>();
-        genTower.TriggeredStart();
+        if (this.gameObject.transform.Find("GeneratorTowerObject") != null)
+        {
+            genTower = this.gameObject.transform.Find("GeneratorTowerObject").GetComponent<GeneratorTower>();
+            genTower.TriggeredStart();
+        }
 
         spawner = this.gameObject.transform.Find("Spawner").GetComponent<SpawnerScript>();
         spawner.TriggeredStart();
