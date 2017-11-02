@@ -89,6 +89,7 @@ public class playerControl : MonoBehaviour
 	// sound effects
 	AudioSource audioSource;
 	public AudioClip roarSFX;
+	public AudioClip fireSFX;
 	bool isNOTChargeUp = true;
 	float roarTimer = 0.0f;
 	float roarTimeLimit;
@@ -227,6 +228,7 @@ public class playerControl : MonoBehaviour
 					// being fired by the boss
 					if(fireball != null) {
 						fireball.GetComponent<PlasmaFireball>().Fire(playerTransform);
+						audioSource.PlayOneShot(fireSFX);
 					}
 
 
