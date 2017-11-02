@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grandDaddySFX: {fileID: 8300000, guid: 7d7ff34d6f153894a803ca5a0ef26a4b, type: 3}
   gunFire: {fileID: 8300000, guid: ec5f3f61fc4216b4db0229e29c01a7b2, type: 3}
+  gunReload: {fileID: 8300000, guid: 0b64a8646e540624bb370de0dbd07c6f, type: 3}
 --- !u!82 &24040622
 AudioSource:
   m_ObjectHideFlags: 0

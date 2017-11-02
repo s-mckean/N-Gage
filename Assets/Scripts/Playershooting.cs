@@ -17,6 +17,10 @@ public class Playershooting : MonoBehaviour {
     public GameObject GunShots;
 
     private float currentClip;
+
+	bool playReloadClip = true;
+
+
     void Start () {
 		
 	}
@@ -25,7 +29,11 @@ public class Playershooting : MonoBehaviour {
     {
 
         if (currentClip <= 0)
-        {
+        {			
+			if(playReloadClip) {
+				AudioController.instance.PlayGunReload();
+				playReloadClip = false;
+			}
             StartCoroutine(Reload());
             return;
         }
@@ -39,11 +47,12 @@ public class Playershooting : MonoBehaviour {
     IEnumerator Reload()
     {
         //Debug.Log("reloading");
-        animator.SetBool("Reloading", true);
+        animator.SetBool("Reloading", true);		
         yield return new WaitForSeconds(reloadTime);
 
         animator.SetBool("Reloading", false);
         currentClip = clipSize;
+		playReloadClip = true;
     }
 
     void shotsFired()
