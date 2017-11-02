@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlasmaFireball : MonoBehaviour {
 
 	public GameObject explosionFab;
+	public GameObject audioObject;	// to play sound effect
 
 	bool isActive = false;
 	
@@ -13,6 +14,7 @@ public class PlasmaFireball : MonoBehaviour {
 
 	float timeToLive = 4.0f;
 	
+
 	public void Fire(Transform playerTransform) {
 		velocity = (playerTransform.position - transform.position).normalized * scalar;
 		isActive = true;
@@ -32,10 +34,14 @@ public class PlasmaFireball : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "LandArea") { 
+			audioObject.transform.parent = null;
+			audioObject.GetComponent<ExplosionSFX>().PlaySFX();
 			Instantiate(explosionFab, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
-		else if(other.gameObject.tag == "Player") {
+		else if(other.gameObject.tag == "Player") {		
+			audioObject.transform.parent = null;
+			audioObject.GetComponent<ExplosionSFX>().PlaySFX();
 			GameObject pt = GameObject.FindGameObjectWithTag("Player");
 			Vector3 direction = (pt.transform.position - gameObject.transform.position);
 			pt.GetComponent<Rigidbody>().AddForce(direction * 20.0f, ForceMode.Impulse);
@@ -44,5 +50,6 @@ public class PlasmaFireball : MonoBehaviour {
 		}
 	}
 
+	// destroyed when the sound finish playing
 
 }
