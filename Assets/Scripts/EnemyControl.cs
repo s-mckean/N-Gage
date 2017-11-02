@@ -36,6 +36,8 @@ public class EnemyControl : MonoBehaviour
     const float UPPER_MOVE_TIME = 1.0f;
 
     public bool enemyIsDead = false;
+    private Vector3 deadPosition;
+    private Quaternion deadRotation;
 
     public void TriggeredStart()
     {
@@ -108,6 +110,8 @@ public class EnemyControl : MonoBehaviour
         hitPoints -= amount;
         if (hitPoints <= 0f)
         {
+            deadPosition = transform.position - transform.parent.position;
+            deadRotation = transform.rotation;
             enemyIsDead = true;
         }
     }
@@ -116,7 +120,9 @@ public class EnemyControl : MonoBehaviour
     {
         // play sound effect
         //AudioController.instance.PlayGrandDaddySFX();
-        Destroy(this.gameObject);
+        GetComponent<Animation>().wrapMode = WrapMode.ClampForever;
+        GetComponent<Animation>().CrossFade("die");
+        StartCoroutine("DieAnimation");
     }
 
     public void MoveRandomly()
@@ -162,5 +168,20 @@ public class EnemyControl : MonoBehaviour
     public void SetHero(Transform player)
     {
         hero = player;
+    }
+
+    IEnumerator DieAnimation()
+    {
+        float timeLeft = 5f;
+        float waitTime = 0.2f;
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        while (timeLeft > 0)
+        {
+            transform.position = deadPosition + transform.parent.position;
+            transform.rotation = deadRotation;
+            timeLeft -= waitTime;
+            yield return new WaitForSeconds(waitTime);
+        }
+        Destroy(gameObject);
     }
 }
