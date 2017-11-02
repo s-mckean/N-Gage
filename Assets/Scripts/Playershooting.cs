@@ -50,6 +50,7 @@ public class Playershooting : MonoBehaviour {
     {
 
         muzzleFlash.Play();
+		AudioController.instance.PlayGunFire();
         currentClip--;
         //Debug.Log("shooting");
         RaycastHit hit;

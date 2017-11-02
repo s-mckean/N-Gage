@@ -6,6 +6,7 @@ public class AudioController : MonoBehaviour {
 
 	#region Create new AudioClip for all sound effects here
 	public AudioClip grandDaddySFX;
+	public AudioClip gunFire;
 
 	#endregion
 
@@ -27,5 +28,9 @@ public class AudioController : MonoBehaviour {
 
 	public void PlayGrandDaddySFX() {
 		audioSource.PlayOneShot(grandDaddySFX);
+	}	
+
+	public void PlayGunFire() {
+		audioSource.PlayOneShot(gunFire);
 	}	
 }
