@@ -199,7 +199,12 @@ public class playerControl : MonoBehaviour
 				if(chargeUPAnimationTimer <= 0.0f) {
 					// fire projectile
 					//Debug.Log("BOSS FIRE PROJECTILE");
-					fireball.GetComponent<PlasmaFireball>().Fire(playerTransform);
+
+					// check if player collided into the fireball before it has the chance of 
+					// being fired by the boss
+					if(fireball != null) {
+						fireball.GetComponent<PlasmaFireball>().Fire(playerTransform);
+					}
 
 
 					// change animation back into movement

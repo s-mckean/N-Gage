@@ -11,7 +11,7 @@ public class PlasmaFireball : MonoBehaviour {
 	Vector3 velocity;
 	float scalar = 14.0f;
 
-	float timeToLive = 2.2f;
+	float timeToLive = 4.0f;
 	
 	public void Fire(Transform playerTransform) {
 		velocity = (playerTransform.position - transform.position).normalized * scalar;
@@ -37,8 +37,8 @@ public class PlasmaFireball : MonoBehaviour {
 		}
 		else if(other.gameObject.tag == "Player") {
 			GameObject pt = GameObject.FindGameObjectWithTag("Player");
-			Vector3 direction = (pt.transform.position - gameObject.transform.position).normalized;
-			pt.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+			Vector3 direction = (pt.transform.position - gameObject.transform.position);
+			pt.GetComponent<Rigidbody>().AddForce(direction * 20.0f, ForceMode.Impulse);
 			Instantiate(explosionFab, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
