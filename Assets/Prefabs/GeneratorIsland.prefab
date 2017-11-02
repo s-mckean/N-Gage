@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 65797745314059550}
   - component: {fileID: 65380542356710282}
   - component: {fileID: 114977357087813004}
+  - component: {fileID: 82870913989939578}
   m_Layer: 0
   m_Name: GeneratorTowerObject
   m_TagString: Generator
@@ -802,6 +803,110 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.49, y: 6.44, z: 11.81}
   m_Center: {x: -0.18, y: 3.8, z: 0.24}
+--- !u!82 &82870913989939578
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823954774714280}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 163ed54a4c4dfd54bbf24a95aa1dec33, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 320
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.9789276
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.10258639
+      value: 0.92176175
+      inSlope: -1.0019541
+      outSlope: -1.0019541
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.32597864
+      value: 0.7160689
+      inSlope: -3.4177303
+      outSlope: -3.4177303
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.6107858
+      value: 0.2615546
+      inSlope: -1.3160706
+      outSlope: -1.3160706
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.85952497
+      value: 0.06183833
+      inSlope: -0.51130474
+      outSlope: -0.51130474
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1.002004
+      outSlope: -1.002004
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!108 &108513461452732632
 Light:
   m_ObjectHideFlags: 1
