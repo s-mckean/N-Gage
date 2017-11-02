@@ -86,6 +86,8 @@ public class playerControl : MonoBehaviour
 	readonly Vector3 fireballOffsetVec = new Vector3(0.0f, 98.8f, 30.64f);
 	
 	
+	// sound effects
+	AudioSource audioSource;
 
 	#region Animator
 	Animator anim;
@@ -138,8 +140,8 @@ public class playerControl : MonoBehaviour
 
 	void Start() {
 		moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
-
 		fireTimeLimit = Random.Range(LOWER_FIRE_LIMIT, UPPER_FIRE_LIMIT);
+		audioSource = GetComponent<AudioSource>();
 
 		// remove after testing
 		transform.parent = null;
@@ -156,6 +158,7 @@ public class playerControl : MonoBehaviour
 	}
 
 	void PlayAttackAnimation() {
+		audioSource.Play();
 		anim.SetTrigger(flyFlameAttack);	
 		IdleAttackCollider.SetActive(true);
 		FlyForwardCollider.SetActive(false);
