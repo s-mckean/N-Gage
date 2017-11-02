@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
             public float RunMultiplier = 2.0f;   // Speed when sprinting
             public KeyCode RunKey = KeyCode.LeftShift;
-            public float JumpForce = 10f;
+            public float JumpForce = 30f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
             [HideInInspector]
             public float CurrentTargetSpeed = 8f;
@@ -205,7 +205,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_RigidBody.drag = 0f;
                     m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce*3f, 0f), ForceMode.Impulse);
+                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
                     m_Jumping = true;
                 }
 
@@ -233,17 +233,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 this.transform.parent = other.transform;
             }
         }
-        /*
+        
         void OnTriggerExit(Collider other)
         {
             if (other.gameObject.tag == "GravityZone")
             {
                 //this.transform.SetParent(null, true);
                 this.transform.parent = null;
-                this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             }
         }
-        */
+        
         private float SlopeMultiplier()
         {
             float angle = Vector3.Angle(m_GroundContactNormal, Vector3.up);
