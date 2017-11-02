@@ -88,6 +88,13 @@ public class playerControl : MonoBehaviour
 	
 	// sound effects
 	AudioSource audioSource;
+	public AudioClip roarSFX;
+	bool isNOTChargeUp = true;
+	float roarTimer = 0.0f;
+	float roarTimeLimit;
+	const float LOWER_ROAR_TIMER = 1.0f;
+	const float UPPER_ROAR_TIMER = 7.0f;
+
 
 	#region Animator
 	Animator anim;
@@ -142,6 +149,7 @@ public class playerControl : MonoBehaviour
 		moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
 		fireTimeLimit = Random.Range(LOWER_FIRE_LIMIT, UPPER_FIRE_LIMIT);
 		audioSource = GetComponent<AudioSource>();
+		roarTimeLimit = Random.Range(LOWER_ROAR_TIMER, UPPER_ROAR_TIMER);
 
 		// remove after testing
 		transform.parent = null;
@@ -189,6 +197,18 @@ public class playerControl : MonoBehaviour
 
 		float delta = Time.deltaTime;
 
+		// play roar sound effect
+		if(isNOTChargeUp) {
+			if((roarTimer += delta) >= roarTimeLimit) {
+				fireTimeLimit += 4.6f;	// make sure the charge up sound doesn't play while the boss is roaring
+				roarTimer = 0.0f;
+				roarTimeLimit = Random.Range(LOWER_ROAR_TIMER, UPPER_ROAR_TIMER) + 4.5f;
+				
+				audioSource.PlayOneShot(roarSFX);
+			}
+		}
+
+
 		#region Fire
 		if(!isFireMode && ( (fireTimer += delta) >= fireTimeLimit)) {
 			isFireMode = true;
@@ -211,6 +231,7 @@ public class playerControl : MonoBehaviour
 
 
 					// change animation back into movement
+					isNOTChargeUp = true;
 					PlayFlyAnimation();
 					chargeUPAnimationTimer = CHARGEUP_ANIMATION_LIMIT;
 					isFireMode = false;
@@ -258,7 +279,8 @@ public class playerControl : MonoBehaviour
 
 
 						// boss is above the player
-						fireball = Instantiate(plasmaFireBallFab, transform.position + (transform.rotation * fireballOffsetVec), Quaternion.identity);	
+						fireball = Instantiate(plasmaFireBallFab, transform.position + (transform.rotation * fireballOffsetVec), Quaternion.identity);
+						isNOTChargeUp = false;
 						PlayAttackAnimation();
 						isInFiringPosition = true;
 					}

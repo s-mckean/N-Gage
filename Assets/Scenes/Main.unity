@@ -3046,6 +3046,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
+        type: 2}
+      propertyPath: roarSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 92be5af1f9498a849b46d1198b2103d8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
   m_IsPrefabParent: 0
