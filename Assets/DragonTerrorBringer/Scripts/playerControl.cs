@@ -20,7 +20,7 @@ public class playerControl : MonoBehaviour
 	public GameObject bellyObj;
 	public GameObject backObj;
 
-	bool isInForceField = false;
+	bool isInForceField = true;
 	 
 	//readonly Vector2 X_BOUND = new Vector2(-778.0f, 778.0f);
 	//readonly Vector2 Y_BOUND = new Vector2(-320.0f, 380.0f);
@@ -139,11 +139,11 @@ public class playerControl : MonoBehaviour
 		idle02 = Animator.StringToHash("Idle02");
 		
 		// remove after testing
-		anim.SetTrigger(flyFlameAttack);	
-		IdleAttackCollider.SetActive(false);
-		FlyForwardCollider.SetActive(true);
-		avoidObsIdleAttack.SetActive(false);
-		avoidObsFlyFoward.SetActive(true);			
+		//anim.SetTrigger(flyFlameAttack);	
+		//IdleAttackCollider.SetActive(false);
+		//FlyForwardCollider.SetActive(true);
+		//avoidObsIdleAttack.SetActive(false);
+		//avoidObsFlyFoward.SetActive(true);			
 	}
 
 	void Start() {
@@ -153,7 +153,7 @@ public class playerControl : MonoBehaviour
 		roarTimeLimit = Random.Range(LOWER_ROAR_TIMER, UPPER_ROAR_TIMER);
 
 		// remove after testing
-		transform.parent = null;
+		//transform.parent = null;
 	}
 
 
@@ -181,13 +181,15 @@ public class playerControl : MonoBehaviour
 		if(isDead) return;
 
 		if(isInForceField) {
-			if(GameObject.FindGameObjectsWithTag("Generator").Length <= 0) {
+			if(GameObject.FindGameObjectsWithTag("ForceField").Length <= 0) {
 				isInForceField = false;
 				
+				audioSource.PlayOneShot(roarSFX);
+
 				// change animation and collider
 				anim.SetTrigger(flyForward);	
 				PlayFlyAnimation();
-
+				
 				transform.parent = null;	
 			}
 
