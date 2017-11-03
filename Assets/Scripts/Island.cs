@@ -45,7 +45,6 @@ public class Island : MonoBehaviour
         {
             genTower.setEndPoint(forceFieldPos);
         }
-
         spawner.TriggeredUpdate();
     }
 

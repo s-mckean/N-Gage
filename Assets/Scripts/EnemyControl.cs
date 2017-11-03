@@ -45,12 +45,9 @@ public class EnemyControl : MonoBehaviour
 	public AudioClip deathSFX;
 	bool isNOTplayingDeathSFX = true;
 
-	void Start() {
-		audioSource = GetComponent<AudioSource>();
-	}
-
 	public void TriggeredStart()
     {
+        audioSource = GetComponent<AudioSource>();
         SetAnimation("walk");
         moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
         speed = (Random.Range(0.0f, 10.0f) <= probabiliyOfStandingStill ? 0.0f : MAX_SPEED);

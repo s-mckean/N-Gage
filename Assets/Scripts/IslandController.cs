@@ -24,7 +24,7 @@ public class IslandController : MonoBehaviour
     private int genTowerAmount = 0;
     public Text towerAmount;
 
-	bool isNOTplayForceFieldDown = true;
+    bool isNOTplayForceFieldDown = true;
 
     // Use this for initialization
     void Start()
@@ -59,15 +59,20 @@ public class IslandController : MonoBehaviour
         genTowerAmount = 0;
         foreach (IslandRing ring in rings)
         {
-                if (forceField != null)
-                {
-                    ring.TriggeredUpdate(forceField.transform.position);
-                }
-                if (ring.genTowerAmount > 0)
-                {
-                    allGenTowersDestroyed = false;
-                }
-                genTowerAmount += ring.genTowerAmount;
+            if (forceField != null)
+            {
+                ring.TriggeredUpdate(forceField.transform.position);
+            }
+            else
+            {
+                ring.TriggeredUpdate( new Vector3(0,0,0) );
+            }
+
+            if (ring.genTowerAmount > 0)
+            {
+                allGenTowersDestroyed = false;
+            }
+            genTowerAmount += ring.genTowerAmount;
         }
         towerAmount.text = genTowerAmount.ToString();
 
@@ -81,11 +86,12 @@ public class IslandController : MonoBehaviour
     public void ReleaseBossEnemy()
     {
         if (forceField != null)
-        {	
-			if(isNOTplayForceFieldDown) {
-				AudioController.instance.PlayForceFielddown();
-				isNOTplayForceFieldDown = false;
-			}
+        {
+            if (isNOTplayForceFieldDown)
+            {
+                AudioController.instance.PlayForceFielddown();
+                isNOTplayForceFieldDown = false;
+            }
             Destroy(forceField, 1.5f); // sfx is about 1.5f second long
         }
     }

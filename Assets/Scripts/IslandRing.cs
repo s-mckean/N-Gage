@@ -17,9 +17,7 @@ public class IslandRing : MonoBehaviour
 
     public Vector3 centerPoint = new Vector3(0, 0, 0);
 
-    [HideInInspector]
     public List<Vector3> positions = new List<Vector3>();
-    [HideInInspector]
     private List<GeneratorTower> genTowers = new List<GeneratorTower>();
     private List<Island> islands = new List<Island>();
 
