@@ -22,20 +22,23 @@ public class Island : MonoBehaviour
 
     public int ringPosition = 1;
 
-    public void triggeredStart( Transform player )
+    public void triggeredStart(Transform player)
     {
         originalPos = gameObject.transform.position;
         gravityZone = this.gameObject.transform.Find("GravityZone").gameObject;
 
-        genTower = this.gameObject.transform.Find("GeneratorTowerObject").GetComponent<GeneratorTower>();
-        genTower.TriggeredStart();
+        if (this.gameObject.transform.Find("GeneratorTowerObject") != null)
+        {
+            genTower = this.gameObject.transform.Find("GeneratorTowerObject").GetComponent<GeneratorTower>();
+            genTower.TriggeredStart();
+        }
 
         spawner = this.gameObject.transform.Find("Spawner").GetComponent<SpawnerScript>();
         spawner.TriggeredStart();
         spawner.setPlayer(player);
     }
 
-    public void triggeredUpdate( Vector3 forceFieldPos )
+    public void triggeredUpdate(Vector3 forceFieldPos)
     {
         floatUpDown();
         if (genTower != null)
@@ -76,17 +79,16 @@ public class Island : MonoBehaviour
         }
     }
 
+
     public bool isGravityZoneEnemyFree()
     {
-        foreach (Transform child in gravityZone.GetComponentsInChildren<Transform>())
+        if (spawner.AreEnemiesLeft())
         {
-            if (spawner.AreEnemiesLeft())
-            {
-                return false;
-            }
+            return false;
         }
         return true;
     }
+
 
     public GeneratorTower getGenTower()
     {

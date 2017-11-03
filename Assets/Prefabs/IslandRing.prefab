@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35efacadfc549540940ff93c3c97ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  islandPrefab: {fileID: 1672206325908958, guid: 1e091695161847844ae1a9da450aa806,
+  islandPrefab: {fileID: 1821176660313722, guid: 80bc182c51abc1946a22831460f72c36,
     type: 2}
   RadiusX: 1
   RadiusZ: 1
@@ -66,4 +66,3 @@ MonoBehaviour:
   - {x: 0.5877852, y: 0, z: -0.80901706}
   - {x: -0.58778536, y: 0, z: -0.80901694}
   - {x: -0.9510565, y: 0, z: 0.30901712}
-  allGenTowersDestroyed: 0
