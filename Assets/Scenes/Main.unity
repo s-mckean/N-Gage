@@ -6010,11 +6010,6 @@ Prefab:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 812024662}
-    - target: {fileID: 82441435857374310, guid: 0594b31ddb91cb444b08d0fe62ac376f,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 56766a291385f4741a6e46f357285968, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
   m_IsPrefabParent: 0
