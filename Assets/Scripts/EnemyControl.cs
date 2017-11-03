@@ -36,8 +36,10 @@ public class EnemyControl : MonoBehaviour
     const float UPPER_MOVE_TIME = 1.0f;
 
     public bool enemyIsDead = false;
+    public bool enemyIsFalling = false;
     private Vector3 deadPosition;
     private Quaternion deadRotation;
+    private bool exited = false;
 
     public void TriggeredStart()
     {
@@ -91,6 +93,10 @@ public class EnemyControl : MonoBehaviour
         {
             this.gameObject.transform.SetParent(other.gameObject.transform, true);
         }
+        else if (other.gameObject.tag == "CreatureArea")
+        {
+            exited = false;
+        }
     }
 
 
@@ -101,6 +107,8 @@ public class EnemyControl : MonoBehaviour
         {
             transform.forward = Quaternion.AngleAxis(180.0f, transform.up) * transform.forward;
             timerMoveInbound = MAX_MOVE_INBOUND_TIME;
+            exited = true;
+            StartCoroutine("FallToDeath");
         }
     }
 
@@ -120,9 +128,16 @@ public class EnemyControl : MonoBehaviour
     {
         // play sound effect
         //AudioController.instance.PlayGrandDaddySFX();
-        GetComponent<Animation>().wrapMode = WrapMode.ClampForever;
-        GetComponent<Animation>().CrossFade("die");
-        StartCoroutine("DieAnimation");
+        if (!enemyIsFalling)
+        {
+            GetComponent<Animation>().wrapMode = WrapMode.ClampForever;
+            GetComponent<Animation>().CrossFade("die");
+            StartCoroutine("DieAnimation");
+        }
+        else
+        {
+            Destroy(gameObject, 3);
+        }
     }
 
     public void MoveRandomly()
@@ -183,5 +198,15 @@ public class EnemyControl : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         Destroy(gameObject);
+    }
+
+    IEnumerator FallToDeath()
+    {
+        yield return new WaitForSeconds(2);
+        if (exited)
+        {
+            enemyIsDead = true;
+            enemyIsFalling = true;
+        }
     }
 }
