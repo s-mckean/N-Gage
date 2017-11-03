@@ -132,6 +132,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Text boostBad;
         private Color tempColor;
 
+		AudioSource audioSource;
+		public AudioClip jumpSFX;
+		public AudioClip boostSFX;
+
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
@@ -139,6 +143,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             mouseLook.Init(transform, cam.transform);
 
             Player = GetComponent<Rigidbody>();
+
+			audioSource = GetComponent<AudioSource>();
         }
 
 
@@ -152,8 +158,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             if (Input.GetKey(boostKey))
-                if (!isBoostOnCooldown)
+                if (!isBoostOnCooldown) {
+					audioSource.PlayOneShot(boostSFX);
                     StartCoroutine(JumpBoost());
+				}
             if (isBoostOnCooldown)
             {
                 tempColor = boostGood.color;
@@ -203,6 +211,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (m_Jump)
                 {
+					
+					audioSource.PlayOneShot(jumpSFX);
                     m_RigidBody.drag = 0f;
                     m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
                     m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
