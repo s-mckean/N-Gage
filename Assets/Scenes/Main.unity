@@ -344,6 +344,7 @@ MonoBehaviour:
   grandDaddySFX: {fileID: 8300000, guid: 7d7ff34d6f153894a803ca5a0ef26a4b, type: 3}
   gunFire: {fileID: 8300000, guid: ec5f3f61fc4216b4db0229e29c01a7b2, type: 3}
   gunReload: {fileID: 8300000, guid: 0b64a8646e540624bb370de0dbd07c6f, type: 3}
+  forceFieldDownSFX: {fileID: 8300000, guid: e3ca041eaff47c4428c952480604a954, type: 3}
 --- !u!82 &24040622
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4856,7 +4857,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1366500645438594, guid: fc229346def80a6478d91b2223de43ee,
     type: 2}
   m_PrefabInternal: {fileID: 1493788374}
---- !u!82 &402172011
+--- !u!82 &402172015
 AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -6009,6 +6010,11 @@ Prefab:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 812024662}
+    - target: {fileID: 82441435857374310, guid: 0594b31ddb91cb444b08d0fe62ac376f,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 56766a291385f4741a6e46f357285968, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
   m_IsPrefabParent: 0
@@ -19111,6 +19117,11 @@ Prefab:
       propertyPath: jumpSFX
       value: 
       objectReference: {fileID: 8300000, guid: 06a569c33b8f27a44ad6eb000a349158, type: 3}
+    - target: {fileID: 114430605278782256, guid: fc229346def80a6478d91b2223de43ee,
+        type: 2}
+      propertyPath: boostSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 309a3cf9cba645847a553a561ca48195, type: 3}
     m_RemovedComponents:
     - {fileID: 114132707737996270, guid: fc229346def80a6478d91b2223de43ee, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fc229346def80a6478d91b2223de43ee, type: 2}

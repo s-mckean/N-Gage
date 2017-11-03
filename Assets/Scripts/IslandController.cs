@@ -24,6 +24,8 @@ public class IslandController : MonoBehaviour
     private int genTowerAmount = 0;
     public Text towerAmount;
 
+	bool isNOTplayForceFieldDown = true;
+
     // Use this for initialization
     void Start()
     {
@@ -79,8 +81,12 @@ public class IslandController : MonoBehaviour
     public void ReleaseBossEnemy()
     {
         if (forceField != null)
-        {
-            Destroy(forceField);
+        {	
+			if(isNOTplayForceFieldDown) {
+				AudioController.instance.PlayForceFielddown();
+				isNOTplayForceFieldDown = false;
+			}
+            Destroy(forceField, 1.5f); // sfx is about 1.5f second long
         }
     }
 
