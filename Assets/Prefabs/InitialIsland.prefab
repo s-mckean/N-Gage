@@ -1030,6 +1030,7 @@ GameObject:
   - component: {fileID: 4542823077871960}
   - component: {fileID: 95180115524655150}
   - component: {fileID: 114622867230228232}
+  - component: {fileID: 82441435857374310}
   m_Layer: 0
   m_Name: RedDragon
   m_TagString: Boss
@@ -3356,6 +3357,98 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82441435857374310
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1657359615681206}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 60b13a418445b1b468e671236408af8f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0
+  MaxDistance: 2000
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.34754086
+      value: 0.40573168
+      inSlope: -1.578629
+      outSlope: -1.578629
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.77640665
+      value: 0.09866965
+      inSlope: -1.0001659
+      outSlope: -1.0001659
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95180115524655150
 Animator:
   serializedVersion: 3
@@ -3431,6 +3524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7253d99d6b28c4d971bce3b9e8f1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 200
   playerTransform: {fileID: 0}
   IdleAttackCollider: {fileID: 1181837626510060}
   FlyForwardCollider: {fileID: 1246035429094214}
@@ -3440,6 +3534,8 @@ MonoBehaviour:
   backObj: {fileID: 1279384924473832}
   plasmaFireBallFab: {fileID: 1318503084118610, guid: f7172129931a2ce469aca6cc31ee3af4,
     type: 2}
+  roarSFX: {fileID: 8300000, guid: 92be5af1f9498a849b46d1198b2103d8, type: 3}
+  fireSFX: {fileID: 8300000, guid: 1e5ebe669345ecf4381909e07c10eeb7, type: 3}
 --- !u!114 &114831258925638256
 MonoBehaviour:
   m_ObjectHideFlags: 1

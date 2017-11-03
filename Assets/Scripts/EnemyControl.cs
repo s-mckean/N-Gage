@@ -41,7 +41,15 @@ public class EnemyControl : MonoBehaviour
     private Quaternion deadRotation;
     private bool exited = false;
 
-    public void TriggeredStart()
+	AudioSource audioSource;
+	public AudioClip deathSFX;
+	bool isNOTplayingDeathSFX = true;
+
+	void Start() {
+		audioSource = GetComponent<AudioSource>();
+	}
+
+	public void TriggeredStart()
     {
         SetAnimation("walk");
         moveTimeLimit = Random.Range(LOWER_MOVE_TIME, UPPER_MOVE_TIME);
@@ -115,6 +123,10 @@ public class EnemyControl : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+		if(!audioSource.isPlaying) {
+			audioSource.Play();
+		}
+
         hitPoints -= amount;
         if (hitPoints <= 0f)
         {
@@ -132,6 +144,10 @@ public class EnemyControl : MonoBehaviour
         {
             GetComponent<Animation>().wrapMode = WrapMode.ClampForever;
             GetComponent<Animation>().CrossFade("die");
+			if(isNOTplayingDeathSFX) {
+				audioSource.PlayOneShot(deathSFX);
+				isNOTplayingDeathSFX = false;
+			}
             StartCoroutine("DieAnimation");
         }
         else

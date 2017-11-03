@@ -205,7 +205,7 @@ public class playerControl : MonoBehaviour
 				roarTimer = 0.0f;
 				roarTimeLimit = Random.Range(LOWER_ROAR_TIMER, UPPER_ROAR_TIMER) + 4.5f;
 				
-				audioSource.PlayOneShot(roarSFX);
+				audioSource.PlayOneShot(roarSFX, 0.96f);
 			}
 		}
 
