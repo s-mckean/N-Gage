@@ -17,6 +17,7 @@ TagManager:
   - BossBody
   - Explosion
   - LandArea
+  - ForceField
   layers:
   - Default
   - TransparentFX
