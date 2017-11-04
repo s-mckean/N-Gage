@@ -2,6 +2,7 @@
 using System.Collections.Generic;
  using UnityEngine;
  using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Healthbar : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Healthbar : MonoBehaviour
     void Update()
     {
         handleBar();
+        if (hitPoints <= 0)
+        {
+            StartCoroutine("LoadDeathScene");
+        }
     }
 
     private void handleBar()
@@ -32,6 +37,13 @@ public class Healthbar : MonoBehaviour
     public void DecrementHealth(float hitAmount)
     {
         hitPoints -= hitAmount;
+    }
+
+    IEnumerator LoadDeathScene()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Lose");
+        yield return null;
     }
 }
 
