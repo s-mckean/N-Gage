@@ -44,6 +44,8 @@ public class EnemyControl : MonoBehaviour
 	AudioSource audioSource;
 	public AudioClip deathSFX;
 	bool isNOTplayingDeathSFX = true;
+    private float timeToHit = 0;
+    public float enemyDamage = 5;
 
 	public void TriggeredStart()
     {
@@ -65,13 +67,19 @@ public class EnemyControl : MonoBehaviour
             Vector3 forwardTransform = transform.forward;
             forwardTransform.y = 0.0f;
             transform.forward = forwardTransform;
+            timeToHit -= Time.deltaTime;
 
             if (Vector3.Distance(transform.position, hero.position) <= 2.5)
             {
                 transform.LookAt(hero);
                 SetAnimation("hit");
+                if(timeToHit <= 0)
+                {
+                    timeToHit = 1.5f;
+                    hero.GetComponent<Healthbar>().DecrementHealth(enemyDamage);
+                }
             }
-            else if (Vector3.Distance(transform.position, hero.position) <= 5)
+            else if (Vector3.Distance(transform.position, hero.position) <= 10)
             {
                 SetAnimation("walk");
                 transform.LookAt(hero);
