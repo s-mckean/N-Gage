@@ -13,6 +13,8 @@ public class PlasmaFireball : MonoBehaviour {
 	float scalar = 14.0f;
 
 	float timeToLive = 4.0f;
+
+    float fireballDamage = 10f;
 	
 
 	public void Fire(Transform playerTransform) {
@@ -42,7 +44,8 @@ public class PlasmaFireball : MonoBehaviour {
 		else if(other.gameObject.tag == "Player") {		
 			audioObject.transform.parent = null;
 			audioObject.GetComponent<ExplosionSFX>().PlaySFX();
-			GameObject pt = GameObject.FindGameObjectWithTag("Player");
+            other.GetComponent<Healthbar>().DecrementHealth(fireballDamage);
+            GameObject pt = other.gameObject;//GameObject.FindGameObjectWithTag("Player");
 			Vector3 direction = (pt.transform.position - gameObject.transform.position);
 			pt.GetComponent<Rigidbody>().AddForce(direction * 20.0f, ForceMode.Impulse);
 			Instantiate(explosionFab, transform.position, Quaternion.identity);
