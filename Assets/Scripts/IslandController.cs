@@ -23,6 +23,7 @@ public class IslandController : MonoBehaviour
 
     private int genTowerAmount = 0;
     public Text towerAmount;
+	public GameObject UITowersLeft;
 
     bool isNOTplayForceFieldDown = true;
 
@@ -80,6 +81,9 @@ public class IslandController : MonoBehaviour
         if (allGenTowersDestroyed == true)
         {
             ReleaseBossEnemy();
+
+			// hide the tower left ui
+			UITowersLeft.SetActive(false);
         }
     }
 

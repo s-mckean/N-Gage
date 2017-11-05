@@ -78,6 +78,7 @@ public class Playershooting : MonoBehaviour {
 				Destroy(shots, 1f);
 			}
 			else if(hit.transform.gameObject.tag == "BossBody") {
+				Debug.Log("hit boss body");
 				GameObject.FindGameObjectWithTag("Boss").GetComponent<playerControl>().Hit(bossDamage);
 				GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
 				Destroy(shots, 1f);
