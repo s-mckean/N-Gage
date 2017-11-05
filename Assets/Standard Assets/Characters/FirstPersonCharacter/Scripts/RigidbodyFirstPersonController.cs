@@ -93,7 +93,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
 
-
         public Vector3 Velocity
         {
             get { return m_RigidBody.velocity; }
@@ -136,6 +135,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public AudioClip jumpSFX;
 		public AudioClip boostSFX;
 
+        public GameObject playerGun;
+        public GameObject target;
+        public GameObject targetParent;
+        private Vector3 targetPos;
+        private Quaternion savedRotation;
+
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
@@ -150,6 +155,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
+            targetParent.transform.position = this.transform.position;
+
+            targetParent.transform.rotation = this.transform.rotation * cam.transform.localRotation;
+
             RotateView();
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
@@ -239,8 +248,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.tag == "GravityZone")
             {
-                //this.transform.SetParent(other.gameObject.transform, true);
+                targetPos = target.transform.position;
+
                 this.transform.parent = other.transform;
+
+                this.transform.LookAt(targetPos);
+                
             }
         }
         
@@ -248,8 +261,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.tag == "GravityZone")
             {
-                //this.transform.SetParent(null, true);
+                targetPos = target.transform.position;
+
                 this.transform.parent = null;
+
+                this.transform.LookAt(targetPos);
             }
         }
         
