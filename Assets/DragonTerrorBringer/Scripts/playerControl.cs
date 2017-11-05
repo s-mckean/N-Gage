@@ -6,7 +6,7 @@ public class playerControl : MonoBehaviour
 {
 
 	int health = 240;
-	const int MAX_HEALTH = 240;		// max health and initial health need to be the same value from the start
+	const int MAX_HEALTH = 440;		// max health and initial health need to be the same value from the start
 	bool isDead = false;
 
 	public Transform playerTransform;
