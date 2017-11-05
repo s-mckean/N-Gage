@@ -14,9 +14,12 @@ public class Healthbar : MonoBehaviour
 
     AudioSource audioSource;
     public AudioClip HurtSound;
+    public AudioClip DeathSound;
 
     Color transparent;
     Color solid;
+
+    private bool isDead = false;
 
     void Start()
     {
@@ -24,7 +27,7 @@ public class Healthbar : MonoBehaviour
         transparent = HurtColor.color;
         transparent.a = 0;
         solid = HurtColor.color;
-        solid.a = .7f;
+        solid.a = .5f;
     }
 
     void Update()
@@ -56,11 +59,16 @@ public class Healthbar : MonoBehaviour
 
     IEnumerator LoadDeathScene()
     {
-        yield return new WaitForSeconds(3);
-		Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        SceneManager.LoadScene("Lose");
-        yield return null;
+        if (isDead == false)
+        {
+            isDead = true;
+            audioSource.PlayOneShot(DeathSound);
+            yield return new WaitForSeconds(3);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene("Lose");
+            yield return null;
+        }
     }
 
     IEnumerator activateHurtColor()

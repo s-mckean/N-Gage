@@ -4619,6 +4619,7 @@ MonoBehaviour:
   healthBar: {fileID: 113997309}
   HurtColor: {fileID: 717234489}
   HurtSound: {fileID: 8300000, guid: 7f25473c68305d14dad305e42cb82b0d, type: 3}
+  DeathSound: {fileID: 8300000, guid: 7cc20b63f90cbd745bde2dc917acf5c1, type: 3}
 --- !u!1 &417916216
 GameObject:
   m_ObjectHideFlags: 0
