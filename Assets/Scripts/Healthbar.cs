@@ -10,12 +10,21 @@ public class Healthbar : MonoBehaviour
     public Image healthBar;
     private float fillAmount;
 
+    public Image HurtColor;
+
     AudioSource audioSource;
     public AudioClip HurtSound;
+
+    Color transparent;
+    Color solid;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        transparent = HurtColor.color;
+        transparent.a = 0;
+        solid = HurtColor.color;
+        solid.a = .7f;
     }
 
     void Update()
@@ -39,6 +48,8 @@ public class Healthbar : MonoBehaviour
 
     public void DecrementHealth(float hitAmount)
     {
+        HurtColor.color = solid;
+        StartCoroutine(activateHurtColor());
         audioSource.PlayOneShot(HurtSound);
         hitPoints -= hitAmount;
     }
@@ -50,6 +61,12 @@ public class Healthbar : MonoBehaviour
         Cursor.visible = true;
         SceneManager.LoadScene("Lose");
         yield return null;
+    }
+
+    IEnumerator activateHurtColor()
+    {
+        yield return new WaitForSeconds(1);
+        HurtColor.color = transparent;
     }
 }
 
