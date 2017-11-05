@@ -6,6 +6,10 @@ public class ParticleSystemScript : MonoBehaviour {
 
 	ParticleSystem ps;
 
+	float explosionDamge = 4.0f;
+
+	bool hasNOTdamgePlayer = true;
+
 	// Use this for initialization
 	void Start () {
 		ps = GetComponent<ParticleSystem>();
@@ -22,7 +26,11 @@ public class ParticleSystemScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Player") {
-			
+			// explosion also damage the player
+			if(hasNOTdamgePlayer) {
+				other.GetComponent<Healthbar>().DecrementHealth(explosionDamge);
+				hasNOTdamgePlayer = false;
+			}
 		}
 	}
 }
