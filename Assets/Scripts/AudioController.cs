@@ -9,6 +9,7 @@ public class AudioController : MonoBehaviour {
 	public AudioClip gunFire;
 	public AudioClip gunReload;
 	public AudioClip forceFieldDownSFX;
+    public AudioClip HurtNoise;
 
 	#endregion
 
@@ -43,4 +44,9 @@ public class AudioController : MonoBehaviour {
 	public void PlayForceFielddown() {
 		audioSource.PlayOneShot(forceFieldDownSFX, 1.0f);
 	}
+
+    public void PlayHurtNoise()
+    {
+        audioSource.PlayOneShot(HurtNoise, 1.0f);
+    }
 }

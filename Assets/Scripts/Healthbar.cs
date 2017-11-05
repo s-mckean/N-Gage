@@ -10,9 +10,12 @@ public class Healthbar : MonoBehaviour
     public Image healthBar;
     private float fillAmount;
 
+    AudioSource audioSource;
+    public AudioClip HurtSound;
+
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -36,6 +39,7 @@ public class Healthbar : MonoBehaviour
 
     public void DecrementHealth(float hitAmount)
     {
+        audioSource.PlayOneShot(HurtSound);
         hitPoints -= hitAmount;
     }
 
