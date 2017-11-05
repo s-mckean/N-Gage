@@ -18,6 +18,7 @@ TagManager:
   - Explosion
   - LandArea
   - ForceField
+  - DeadZone
   layers:
   - Default
   - TransparentFX

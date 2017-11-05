@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -241,6 +242,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 //this.transform.SetParent(other.gameObject.transform, true);
                 this.transform.parent = other.transform;
+            }
+            else if (other.CompareTag("DeadZone"))
+            {
+                SceneManager.LoadScene("Lose");
             }
         }
         
