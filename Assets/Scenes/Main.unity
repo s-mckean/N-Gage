@@ -5863,6 +5863,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
+        type: 2}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 812024662}
     - target: {fileID: 4336968623063738, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0.34885347
@@ -5879,11 +5884,6 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.65926594
       objectReference: {fileID: 0}
-    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
-        type: 2}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 812024662}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
   m_IsPrefabParent: 0
@@ -22560,6 +22560,7 @@ MonoBehaviour:
   ringAmount: 5
   player: {fileID: 402172010}
   towerAmount: {fileID: 1931731556}
+  UITowersLeft: {fileID: 2084806373}
 --- !u!4 &2099846037
 Transform:
   m_ObjectHideFlags: 0
