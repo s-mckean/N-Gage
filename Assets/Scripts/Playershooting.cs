@@ -20,7 +20,7 @@ public class Playershooting : MonoBehaviour {
 
 	bool playReloadClip = true;
 
-	int bossDamage = 20.0f;
+	int bossDamage = 20;
 
     void Start () {
 		
