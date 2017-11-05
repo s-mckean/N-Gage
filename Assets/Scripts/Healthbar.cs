@@ -21,6 +21,13 @@ public class Healthbar : MonoBehaviour
 
     private bool isDead = false;
 
+	// let the ExplosionSFX know the player is dead
+	// so it'll decrese the sfx 
+	// we want to hear the death sound
+	public float HealthPoints() {
+		return hitPoints;
+	}
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -50,11 +57,14 @@ public class Healthbar : MonoBehaviour
     }
 
     public void DecrementHealth(float hitAmount)
-    {
+    {		
+
         HurtColor.color = solid;
         StartCoroutine(activateHurtColor());
-        audioSource.PlayOneShot(HurtSound);
-        hitPoints -= hitAmount;
+		hitPoints -= hitAmount;
+		if(hitPoints > 0.0f)
+			audioSource.PlayOneShot(HurtSound);
+        
     }
 
     IEnumerator LoadDeathScene()
@@ -62,7 +72,7 @@ public class Healthbar : MonoBehaviour
         if (isDead == false)
         {
             isDead = true;
-            audioSource.PlayOneShot(DeathSound);
+            audioSource.PlayOneShot(DeathSound, 1.0f);
             yield return new WaitForSeconds(3);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

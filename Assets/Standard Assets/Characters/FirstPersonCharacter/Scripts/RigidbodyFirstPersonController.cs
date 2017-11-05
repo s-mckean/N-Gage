@@ -349,6 +349,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Jumping = false;
             }
         }
+	
 
         IEnumerator JumpBoost()
         {

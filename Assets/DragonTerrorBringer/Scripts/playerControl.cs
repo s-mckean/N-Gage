@@ -91,6 +91,7 @@ public class playerControl : MonoBehaviour
 	AudioSource audioSource;
 	public AudioClip roarSFX;
 	public AudioClip fireSFX;
+	Healthbar playerHealthBar;	// we want to hear the player scream
 	bool isNOTChargeUp = true;
 	float roarTimer = 0.0f;
 	float roarTimeLimit;
@@ -152,6 +153,8 @@ public class playerControl : MonoBehaviour
 		fireTimeLimit = Random.Range(LOWER_FIRE_LIMIT, UPPER_FIRE_LIMIT);
 		audioSource = GetComponent<AudioSource>();
 		roarTimeLimit = Random.Range(LOWER_ROAR_TIMER, UPPER_ROAR_TIMER);
+
+		playerHealthBar = GameObject.FindGameObjectWithTag("Player").GetComponent<Healthbar>();
 
 		// remove after testing
 		transform.parent = null;
@@ -231,7 +234,13 @@ public class playerControl : MonoBehaviour
 					// being fired by the boss
 					if(fireball != null) {
 						fireball.GetComponent<PlasmaFireball>().Fire(playerTransform);
-						audioSource.PlayOneShot(fireSFX);
+
+						if(playerHealthBar && playerHealthBar.HealthPoints() <= 0.0f) {
+							audioSource.PlayOneShot(fireSFX, 0.3f);
+						}
+						else { 
+							audioSource.PlayOneShot(fireSFX);
+						}
 					}
 
 
