@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class playerControl : MonoBehaviour 
 {
@@ -503,8 +504,16 @@ public class playerControl : MonoBehaviour
 			isDead = true;
 			Die();
 			Destroy(gameObject, 1.6f);
+            StartCoroutine("WinSceneLoad");
 		}
 	}
+
+    IEnumerator WinSceneLoad()
+    {
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene("Win");
+        yield return null;
+    }
 
 
 

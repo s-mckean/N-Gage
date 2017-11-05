@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -135,7 +136,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public AudioClip jumpSFX;
 		public AudioClip boostSFX;
 
-        public GameObject playerGun;
         public GameObject target;
         public GameObject targetParent;
         private Vector3 targetPos;
@@ -155,9 +155,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
-            targetParent.transform.position = this.transform.position;
-
-            targetParent.transform.rotation = this.transform.rotation * cam.transform.localRotation;
 
             RotateView();
 
@@ -194,6 +191,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            targetParent.transform.position = this.transform.position;
+
+            targetParent.transform.rotation = this.transform.rotation * cam.transform.localRotation;
 
             GroundCheck();
             Vector2 input = GetInput();
@@ -255,8 +255,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 this.transform.LookAt(targetPos);
                 
             }
+            else if (other.CompareTag("DeadZone"))
+            {
+                SceneManager.LoadScene("Lose");
+            }
         }
         
+        /*
         void OnTriggerExit(Collider other)
         {
             if (other.gameObject.tag == "GravityZone")
@@ -268,6 +273,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 this.transform.LookAt(targetPos);
             }
         }
+         * */
         
         private float SlopeMultiplier()
         {
