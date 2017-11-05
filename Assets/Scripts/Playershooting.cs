@@ -20,6 +20,7 @@ public class Playershooting : MonoBehaviour {
 
 	bool playReloadClip = true;
 
+	int bossDamage = 20.0f;
 
     void Start () {
 		
@@ -77,7 +78,7 @@ public class Playershooting : MonoBehaviour {
 				Destroy(shots, 1f);
 			}
 			else if(hit.transform.gameObject.tag == "BossBody") {
-				GameObject.FindGameObjectWithTag("Boss").GetComponent<playerControl>().Hit(20);
+				GameObject.FindGameObjectWithTag("Boss").GetComponent<playerControl>().Hit(bossDamage);
 				GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
 				Destroy(shots, 1f);
 			}

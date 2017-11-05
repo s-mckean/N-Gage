@@ -511,6 +511,7 @@ public class playerControl : MonoBehaviour
 		health -= damage;
 		if(health <= 0) {
 			isDead = true;
+			AudioController.instance.PlayGrandDaddySFX();
 			Die();
 			Destroy(gameObject, 1.6f);
             StartCoroutine("WinSceneLoad");
