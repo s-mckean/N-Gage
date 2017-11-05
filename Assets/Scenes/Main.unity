@@ -4615,7 +4615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &412917655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5936,6 +5936,21 @@ Prefab:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 812024662}
+    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
+        type: 2}
+      propertyPath: BossHealthBG
+      value: 
+      objectReference: {fileID: 1319939917}
+    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
+        type: 2}
+      propertyPath: BossHealth
+      value: 
+      objectReference: {fileID: 412917654}
+    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
+        type: 2}
+      propertyPath: bossText
+      value: 
+      objectReference: {fileID: 1473023607}
     - target: {fileID: 4336968623063738, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0.34885347
@@ -5952,21 +5967,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.65926594
       objectReference: {fileID: 0}
-    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
-        type: 2}
-      propertyPath: BossHealthBG
-      value: 
-      objectReference: {fileID: 1319939917}
-    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
-        type: 2}
-      propertyPath: BossHealth
-      value: 
-      objectReference: {fileID: 412917654}
-    - target: {fileID: 114622867230228232, guid: 0594b31ddb91cb444b08d0fe62ac376f,
-        type: 2}
-      propertyPath: bossText
-      value: 
-      objectReference: {fileID: 1473023607}
+    - target: {fileID: 1585749331676226, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0594b31ddb91cb444b08d0fe62ac376f, type: 2}
   m_IsPrefabParent: 0
@@ -13264,7 +13268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1319939918
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15164,7 +15168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1473023608
 RectTransform:
   m_ObjectHideFlags: 0
