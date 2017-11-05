@@ -21,7 +21,7 @@ public class playerControl : MonoBehaviour
 	public GameObject bellyObj;
 	public GameObject backObj;
 
-	bool isInForceField = true;
+	bool isInForceField = false;
 	 
 	//readonly Vector2 X_BOUND = new Vector2(-778.0f, 778.0f);
 	//readonly Vector2 Y_BOUND = new Vector2(-320.0f, 380.0f);
@@ -138,13 +138,13 @@ public class playerControl : MonoBehaviour
 		land = Animator.StringToHash("Land");
 		die = Animator.StringToHash("Die");
 		idle02 = Animator.StringToHash("Idle02");
-		
+
 		// remove after testing
-		//anim.SetTrigger(flyFlameAttack);	
-		//IdleAttackCollider.SetActive(false);
-		//FlyForwardCollider.SetActive(true);
-		//avoidObsIdleAttack.SetActive(false);
-		//avoidObsFlyFoward.SetActive(true);			
+		anim.SetTrigger(flyFlameAttack);
+		IdleAttackCollider.SetActive(false);
+		FlyForwardCollider.SetActive(true);
+		avoidObsIdleAttack.SetActive(false);
+		avoidObsFlyFoward.SetActive(true);
 	}
 
 	void Start() {
@@ -154,7 +154,7 @@ public class playerControl : MonoBehaviour
 		roarTimeLimit = Random.Range(LOWER_ROAR_TIMER, UPPER_ROAR_TIMER);
 
 		// remove after testing
-		//transform.parent = null;
+		transform.parent = null;
 	}
 
 

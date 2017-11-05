@@ -29,18 +29,18 @@ public class AudioController : MonoBehaviour {
 	}
 
 	public void PlayGrandDaddySFX() {
-		audioSource.PlayOneShot(grandDaddySFX);
+		audioSource.PlayOneShot(grandDaddySFX, 1.0f);
 	}	
 
 	public void PlayGunFire() {
-		audioSource.PlayOneShot(gunFire);
+		audioSource.PlayOneShot(gunFire, 1.0f);
 	}	
 
 	public void PlayGunReload() {
-		audioSource.PlayOneShot(gunReload);
+		audioSource.PlayOneShot(gunReload, 1.0f);
 	}
 
 	public void PlayForceFielddown() {
-		audioSource.PlayOneShot(forceFieldDownSFX);
+		audioSource.PlayOneShot(forceFieldDownSFX, 1.0f);
 	}
 }
