@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public class playerControl : MonoBehaviour 
 {
 
-	public int health = 200;
+	int health = 240;
+	const int MAX_HEALTH = 240;		// max health and initial health need to be the same value from the start
 	bool isDead = false;
 
 	public Transform playerTransform;
@@ -98,6 +99,11 @@ public class playerControl : MonoBehaviour
 	const float LOWER_ROAR_TIMER = 1.0f;
 	const float UPPER_ROAR_TIMER = 7.0f;
 
+	// health bar 
+	public GameObject BossHealthBG;
+	public GameObject BossHealth;
+	public GameObject bossText;
+
 
 	#region Animator
 	Animator anim;
@@ -156,6 +162,7 @@ public class playerControl : MonoBehaviour
 
 		playerHealthBar = GameObject.FindGameObjectWithTag("Player").GetComponent<Healthbar>();
 
+
 		// remove after testing
 		transform.parent = null;
 	}
@@ -195,6 +202,12 @@ public class playerControl : MonoBehaviour
 				PlayFlyAnimation();
 				
 				transform.parent = null;	
+
+				// turn on UI
+				BossHealthBG.SetActive(true);
+				  BossHealth.SetActive(true);
+				    bossText.SetActive(true);
+
 			}
 
 			return;
@@ -509,6 +522,11 @@ public class playerControl : MonoBehaviour
 		if(isDead) return;
 
 		health -= damage;
+
+		// decrease the health bar
+		if(health < 0) health = 0;
+		BossHealth.transform.localScale = new Vector3((float)health/MAX_HEALTH, 1.0f, 1.0f);
+
 		if(health <= 0) {
 			isDead = true;
 			AudioController.instance.PlayGrandDaddySFX();
