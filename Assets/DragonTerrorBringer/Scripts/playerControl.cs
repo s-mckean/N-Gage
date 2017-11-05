@@ -511,6 +511,8 @@ public class playerControl : MonoBehaviour
     IEnumerator WinSceneLoad()
     {
         yield return new WaitForSeconds(10);
+		Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("Win");
         yield return null;
     }

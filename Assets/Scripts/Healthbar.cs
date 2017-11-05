@@ -42,6 +42,8 @@ public class Healthbar : MonoBehaviour
     IEnumerator LoadDeathScene()
     {
         yield return new WaitForSeconds(3);
+		Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("Lose");
         yield return null;
     }
