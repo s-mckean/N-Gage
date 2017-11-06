@@ -531,14 +531,15 @@ public class playerControl : MonoBehaviour
 			isDead = true;
 			AudioController.instance.PlayGrandDaddySFX();
 			Die();
-			Destroy(gameObject, 1.6f);
+			Destroy(gameObject, 2f);
             StartCoroutine("WinSceneLoad");
 		}
 	}
 
     IEnumerator WinSceneLoad()
     {
-        yield return new WaitForSeconds(10);
+        Debug.Log("Loading");
+        yield return new WaitForSeconds(1.5f);
 		Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         SceneManager.LoadScene("Win");
