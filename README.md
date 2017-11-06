@@ -14,11 +14,9 @@ Our initial plan for our game was to have the player jump from island to island 
 
 -Player 
 -Island Enemy 
+-Dragon
 
 
-#22 Plasma fireball explosion causes damage on the player too.  -  When the fireball explode and the player is within a blast radius, the user can see fire particles in the scene and hear the playing making a "hurt" sound.  
-
-#33 Game Sound effects - User can hear player jumping, player boosting, player getting hit by enemies or fireball, enemies dying, enemies getting hurt, player shooting, gun reloading, boss dying, boss roaring, boss charging up, boss shooting, and energy shield disappearing.
 
 
 
