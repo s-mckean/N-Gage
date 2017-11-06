@@ -15380,6 +15380,11 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1896445318}
+    - target: {fileID: 114430605278782256, guid: fc229346def80a6478d91b2223de43ee,
+        type: 2}
+      propertyPath: self
+      value: 
+      objectReference: {fileID: 402172010}
     m_RemovedComponents:
     - {fileID: 114132707737996270, guid: fc229346def80a6478d91b2223de43ee, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fc229346def80a6478d91b2223de43ee, type: 2}
