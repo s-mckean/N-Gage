@@ -255,10 +255,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 this.transform.LookAt(targetPos);
                 
             }
-            else if (other.CompareTag("DeadZone"))
-            {
-                SceneManager.LoadScene("Lose");
-            }
+            //else if (other.CompareTag("DeadZone"))
+            //{
+            //    SceneManager.LoadScene("Lose");
+            //}
         }
         
         /*
