@@ -19,6 +19,13 @@ public class Healthbar : MonoBehaviour
     Color transparent;
     Color solid;
 
+	
+	float deadZoneTimer = 100.0f;
+	const float DEADZONE_TIME_LIMIT = 2.0f; // every singe the player is in the dead zone player health get decrease by 10.
+	float deadZoneDamage = 1.0f;
+	float deadZoneDepth = -500.0f;
+
+
     private bool isDead = false;
 
 	// let the ExplosionSFX know the player is dead
@@ -44,6 +51,13 @@ public class Healthbar : MonoBehaviour
         {
             StartCoroutine("LoadDeathScene");
         }
+
+		if(!isDead) {
+			if(transform.position.y <= deadZoneDepth && ((deadZoneTimer += Time.deltaTime) >= DEADZONE_TIME_LIMIT)) {
+				DecrementHealth(deadZoneDamage);
+				deadZoneTimer = 0.0f;
+			}
+		}
     }
 
     private void handleBar()
