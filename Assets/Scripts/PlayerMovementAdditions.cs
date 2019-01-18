@@ -28,7 +28,6 @@ public class PlayerMovementAdditions : MonoBehaviour {
     public IEnumerator JumpBoost()
     {       
         isBoostOnCooldown = true;
-        //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         Vector3 angle = mainCamera.transform.forward;
         Vector3 v = Player.velocity;
         Player.AddForce(angle * boostStrength);

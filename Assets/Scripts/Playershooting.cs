@@ -47,7 +47,6 @@ public class Playershooting : MonoBehaviour {
 
     IEnumerator Reload()
     {
-        //Debug.Log("reloading");
         animator.SetBool("Reloading", true);		
         yield return new WaitForSeconds(reloadTime);
 
@@ -62,13 +61,11 @@ public class Playershooting : MonoBehaviour {
         muzzleFlash.Play();
 		AudioController.instance.PlayGunFire();
         currentClip--;
-        //Debug.Log("shooting");
         RaycastHit hit;
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {			
 			if(hit.transform.gameObject.tag == "Enemy") {
 				EnemyControl enemy = hit.transform.GetComponent<EnemyControl>();
-				//Debug.Log(hit.transform.name);
 				if (enemy != null)
 				{
 					enemy.TakeDamage(damage);
@@ -78,7 +75,6 @@ public class Playershooting : MonoBehaviour {
 				Destroy(shots, 1f);
 			}
 			else if(hit.transform.gameObject.tag == "BossBody") {
-				//Debug.Log("hit boss body");
 				GameObject.FindGameObjectWithTag("Boss").GetComponent<playerControl>().Hit(bossDamage);
 				GameObject shots = Instantiate(GunShots, hit.point, Quaternion.LookRotation(hit.normal));
 				Destroy(shots, 1f);
