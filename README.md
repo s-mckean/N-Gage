@@ -10,3 +10,5 @@ To play the game you use WASD on your keyboard to move, Spacebar to jump, hold S
 
 To download just the game or view the full demo video use this link:
 https://drive.google.com/drive/folders/1Tw8bB1E6Q4mJfyzXih_ayi-BzMTKVjtd?usp=sharing
+
+Note: The entire "Game Download" folder must be downloaded in order to play
